@@ -1,0 +1,13 @@
+.idea
+.vscode
+tsconfig.tsbuildinfo
+
+dist
+cache
+coverage
+.DS_Store
+src/.DS_Store
+
+# dependencies
+node_modules
+
