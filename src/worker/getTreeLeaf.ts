@@ -35,7 +35,10 @@ const getTreeLeaf = (values: Input): Uint8Array => {
   catch (error) {
     console.error(error)
 
-    onError('Failed to generate the Merkle tree')
+    onError({
+      message: 'Failed to generate the Merkle tree',
+      type: 'MERKLE_TREE_GENERATION_ERROR',
+    })
 
     return new Uint8Array()
   }

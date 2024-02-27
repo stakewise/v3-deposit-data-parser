@@ -2,6 +2,7 @@ import { StandardMerkleTree } from '@openzeppelin/merkle-tree'
 
 import type { DepositDataFile, WorkerOutput } from './types'
 
+
 type Input = {
   pubkeySet: Set<string>
   treeLeaves: Uint8Array[]

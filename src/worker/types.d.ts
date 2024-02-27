@@ -6,7 +6,7 @@ export type FileItem = {
 
 export type DepositDataFile = FileItem[]
 
-export type OnError = (error: string) => void
+export type OnError = (error: Error) => void
 
 export type DepositData = {
   amount: number
@@ -34,3 +34,17 @@ export type WorkerOutput = {
 }
 
 export type SupportedNetworks = 'mainnet' | 'goerli' | 'gnosis' | 'holesky'
+
+export type ErrorTypes =
+  'EMPTY_FILE' |
+  'MISSING_FIELDS' |
+  'INVALID_SIGNATURE' |
+  'INVALID_JSON_FORMAT' |
+  'DUPLICATE_PUBLIC_KEYS' |
+  'INVALID_PUBLIC_KEY_FORMAT' |
+  'MERKLE_TREE_GENERATION_ERROR'
+
+export type Error = {
+  message: string
+  type: ErrorTypes
+}

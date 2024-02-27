@@ -5,14 +5,14 @@ import getPostMessage from './getPostMessage'
 import getDepositData from './getDepositData'
 import validateFields from './validateFields'
 import verifySignature from './verifySignature'
-import type { FileItem, WorkerInput } from './types'
+import type { FileItem, WorkerInput, Error } from './types'
 
 
 export function depositDataParser() {
   self.addEventListener('message', async (event: MessageEvent<WorkerInput>) => {
     const { vaultAddress, network, file } = event.data
 
-    const onError = (error: string) => {
+    const onError = (error: Error) => {
       postMessage({ error })
       close()
 
@@ -51,7 +51,10 @@ export function depositDataParser() {
       })
 
       if (pubkeySet.size !== parsedFile?.length) {
-        onError('Failed to verify the deposit data public keys. All the entries must be unique.')
+        onError({
+          message: 'Failed to verify the deposit data public keys. All the entries must be unique.',
+          type: 'DUPLICATE_PUBLIC_KEYS',
+        })
       }
 
       const result = getPostMessage({ pubkeySet, parsedFile, treeLeaves })

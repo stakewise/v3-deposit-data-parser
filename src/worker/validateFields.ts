@@ -14,10 +14,10 @@ const fileFields = [
 const validateFields = (values: Input) => {
   const { item, onError } = values
 
-  let missingFields: string[] = []
+  const missingFields: string[] = []
 
   fileFields.forEach((field) => {
-    const isExist = item.hasOwnProperty(field)
+    const isExist = Object.prototype.hasOwnProperty.call(item, field)
 
     if (!isExist) {
       missingFields.push(field)
@@ -27,7 +27,10 @@ const validateFields = (values: Input) => {
   if (missingFields.length) {
     const error = `Failed to verify the deposit data public keys. Missing fields: ${missingFields.join(',')}`
 
-    onError(error)
+    onError({
+      message: error,
+      type: 'MISSING_FIELDS',
+    })
   }
 }
 

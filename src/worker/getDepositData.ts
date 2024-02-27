@@ -28,7 +28,10 @@ const getDepositData = (values: Input): DepositData => {
   catch (error) {
     console.error(error)
 
-    onError('Failed to parse deposit data public key')
+    onError({
+      message: 'Failed to parse deposit data public key',
+      type: 'INVALID_PUBLIC_KEY_FORMAT',
+    })
 
     return {
       amount: 0,
