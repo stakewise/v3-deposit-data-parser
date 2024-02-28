@@ -1,7 +1,7 @@
 import type { ParserError } from './helpers/errors'
 
 
-export type FileItem = {
+type FileItem = {
   amount: number
   pubkey: string
   signature: string
@@ -9,7 +9,7 @@ export type FileItem = {
 
 export type DepositDataFile = FileItem[]
 
-export type Progress = {
+type Progress = {
   total: number
   value: number
 }
