@@ -1,7 +1,7 @@
 import type { DepositDataFile } from '../types'
 
 
-const parseJsonFile =  async (file: File): Promise<DepositDataFile | null> => (
+const parseJsonFile = async (file: File): Promise<DepositDataFile | null> => (
   new Promise((resolve) => {
     const fileReader = new FileReader()
 

@@ -9,8 +9,6 @@ export type FileItem = {
 
 export type DepositDataFile = FileItem[]
 
-export type OnError = (error: ParserError) => void
-
 export type Progress = {
   total: number
   value: number
@@ -28,7 +26,6 @@ export type ParserInput = {
   vaultAddress: string
   network: SupportedNetworks
   onProgress?: (progress: Progress) => void
-  onErrorCallback?: (error: ParserError) => void
 }
 
 export type ParserOutput = {

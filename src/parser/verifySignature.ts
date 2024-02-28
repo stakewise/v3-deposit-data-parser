@@ -1,5 +1,5 @@
 import { containers, computeDomain, getForkVersion, prefix0x, createError, ErrorTypes } from './helpers'
-import type { DepositData, OnError, SupportedNetworks } from './types'
+import type { DepositData, SupportedNetworks } from './types'
 
 
 // Deposit domain definition according to Ethereum specification
@@ -23,11 +23,10 @@ type Input = {
   signature: string
   depositData: DepositData
   network: SupportedNetworks
-  onError: OnError
 }
 
 const verifySignature = (values: Input) => {
-  const { bls, pubkey, signature, depositData, network, onError } = values
+  const { bls, pubkey, signature, depositData, network } = values
 
   const signatureError = createError(ErrorTypes.INVALID_SIGNATURE, { network: networkNames[network] })
 
@@ -44,12 +43,13 @@ const verifySignature = (values: Input) => {
     const isVerifiedSignature = pub.verify(sig, signingRoot)
 
     if (!isVerifiedSignature) {
-      onError(signatureError)
+      throw (signatureError)
     }
   }
   catch (error) {
     console.error(error)
-    onError(signatureError)
+
+    throw (signatureError)
   }
 }
 

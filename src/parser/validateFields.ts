@@ -1,11 +1,10 @@
 import { ErrorTypes, createError } from './helpers'
 
-import type { FileItem, OnError } from './types'
+import type { FileItem } from './types'
 
 
 type Input = {
   item: FileItem
-  onError: OnError
 }
 
 const fileFields = [
@@ -14,7 +13,7 @@ const fileFields = [
 ] as const
 
 const validateFields = (values: Input) => {
-  const { item, onError } = values
+  const { item } = values
 
   const missingFields: string[] = []
 
@@ -29,7 +28,7 @@ const validateFields = (values: Input) => {
   if (missingFields.length) {
     const error = createError(ErrorTypes.MISSING_FIELDS, { fields: missingFields.join(',') })
 
-    onError(error)
+    throw (error)
   }
 }
 

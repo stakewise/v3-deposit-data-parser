@@ -1,20 +1,19 @@
 import { getBytes } from 'ethers'
 
 import { containers, prefix0x, createError, ErrorTypes } from './helpers'
-import type { DepositData, OnError } from './types'
+import type { DepositData } from './types'
 
 
 type Input = {
   pubkey: string
   signature: string
   depositData: DepositData
-  onError: OnError
 }
 
 // Creates an array concatenating pubkey, signature, and hashTreeRoot for a given deposit data
 // This array is used to create a Merkle tree and load it into IPFS
 const getTreeLeaf = (values: Input): Uint8Array => {
-  const { depositData, pubkey, signature, onError } = values
+  const { depositData, pubkey, signature } = values
 
   try {
     // Calculate the hash tree root for the given deposit data and signature
@@ -35,9 +34,7 @@ const getTreeLeaf = (values: Input): Uint8Array => {
   catch (error) {
     console.error(error)
 
-    onError(createError(ErrorTypes.MERKLE_TREE_GENERATION_ERROR))
-
-    return new Uint8Array()
+    throw (createError(ErrorTypes.MERKLE_TREE_GENERATION_ERROR))
   }
 }
 

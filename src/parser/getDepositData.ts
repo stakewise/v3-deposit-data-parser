@@ -1,17 +1,16 @@
 import { getBytes } from 'ethers'
 
-import type { DepositData, OnError } from './types'
+import type { DepositData } from './types'
 import { getWithdrawalCredentials, prefix0x, createError, ErrorTypes } from './helpers'
 
 
 type Input = {
   pubkey: string
   vaultAddress: string
-  onError: OnError
 }
 
 const getDepositData = (values: Input): DepositData => {
-  const { pubkey, vaultAddress, onError } = values
+  const { pubkey, vaultAddress } = values
 
   try {
     const withdrawalCredentials = getWithdrawalCredentials(vaultAddress)
@@ -28,14 +27,7 @@ const getDepositData = (values: Input): DepositData => {
   catch (error) {
     console.error(error)
 
-    onError(createError(ErrorTypes.INVALID_PUBLIC_KEY_FORMAT))
-
-    return {
-      amount: 0,
-      pubkey: new Uint8Array,
-      signature: Buffer.alloc(0),
-      withdrawalCredentials: Buffer.alloc(0),
-    }
+    throw (createError(ErrorTypes.INVALID_PUBLIC_KEY_FORMAT))
   }
 }
 

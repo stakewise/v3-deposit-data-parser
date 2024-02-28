@@ -1,5 +1,4 @@
 import { createError, ErrorTypes } from './helpers'
-import type { ParserError } from './helpers'
 
 import initBls from './initBls'
 import getTreeLeaf from './getTreeLeaf'
@@ -12,55 +11,43 @@ import type { FileItem, ParserInput } from './types'
 
 
 export const depositDataParser = async (input: ParserInput) => {
-  const { vaultAddress, network, file, onProgress, onErrorCallback } = input
+  const { vaultAddress, network, file, onProgress } = input
 
-    const onError = (error: ParserError) => {
-      if (typeof onErrorCallback === 'function') {
-        onErrorCallback(error)
-      }
+  const bls = await initBls()
+  const parsedFile = await validateFile({ file })
 
-      throw error // to stop the cycle and skip other checks
-    }
+  if (parsedFile) {
+    const pubkeySet = new Set<string>()
+    const treeLeaves: Uint8Array[] = []
 
-    try {
-      const bls = await initBls()
-      const parsedFile = await validateFile({ file, onError })
+    parsedFile.forEach((item: FileItem, index) => {
+      const { pubkey, signature } = item
 
-      if (parsedFile) {
-        const pubkeySet = new Set<string>()
-        const treeLeaves: Uint8Array[] = []
+      validateFields({ item })
 
-        parsedFile.forEach((item: FileItem, index) => {
-          const { pubkey, signature } = item
+      const depositData = getDepositData({ pubkey, vaultAddress })
 
-          validateFields({ item, onError })
+      verifySignature({ bls, pubkey, signature, depositData, network })
 
-          const depositData = getDepositData({ pubkey, vaultAddress, onError })
+      const treeLeaf = getTreeLeaf({ pubkey, signature, depositData })
 
-          verifySignature({ bls, pubkey, signature, depositData, network, onError })
+      pubkeySet.add(pubkey)
+      treeLeaves.push(treeLeaf)
 
-          const treeLeaf = getTreeLeaf({ pubkey, signature, depositData, onError })
-
-          pubkeySet.add(pubkey)
-          treeLeaves.push(treeLeaf)
-
-          if (parsedFile.length > 1000) {
-            if (typeof onProgress === 'function') {
-              onProgress({
-                total: parsedFile.length,
-                value: index + 1,
-              })
-            }
-          }
-        })
-
-        if (pubkeySet.size !== parsedFile?.length) {
-          onError(createError(ErrorTypes.DUPLICATE_PUBLIC_KEYS))
+      if (parsedFile.length > 1000) {
+        if (typeof onProgress === 'function') {
+          onProgress({
+            total: parsedFile.length,
+            value: index + 1,
+          })
         }
-
-        return getPostMessage({ pubkeySet, parsedFile, treeLeaves })
       }
-    } catch (error) {
-      console.error(`Deposit data error: ${error}`)
+    })
+
+    if (pubkeySet.size !== parsedFile?.length) {
+      throw (createError(ErrorTypes.DUPLICATE_PUBLIC_KEYS))
     }
+
+    return getPostMessage({ pubkeySet, parsedFile, treeLeaves })
+}
 }

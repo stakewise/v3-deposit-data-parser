@@ -1,46 +1,32 @@
 import { createError, parseJsonFile, ErrorTypes } from './helpers'
-import type { ParserError } from './helpers'
 
-import type { DepositDataFile, OnError } from './types'
+import type { DepositDataFile } from './types'
 
 
 type Input = {
   file: File
-  onError: OnError
 }
-
-type Output = DepositDataFile | null
 
 const JsonError = createError(ErrorTypes.INVALID_JSON_FORMAT)
 
-const validateFile = async (values: Input): Promise<Output> => {
-  const { file, onError } = values
+const validateFile = (values: Input): Promise<DepositDataFile> => {
+  const { file } = values
 
-  try {
-    const parsedFile = await parseJsonFile(file)
+  return parseJsonFile(file)
+    .then((parsedFile) => {
+      if (!Array.isArray(parsedFile)) {
+        return Promise.reject(JsonError)
+      }
+      else if (parsedFile.length === 0) {
+        return Promise.reject(createError(ErrorTypes.EMPTY_FILE))
+      }
 
-    let error: ParserError | null = null
+      return parsedFile
+    }, (error) => {
+      console.error(error)
 
-    if (!Array.isArray(parsedFile)) {
-      error = JsonError
-    }
-    else if (parsedFile.length === 0) {
-      error = createError(ErrorTypes.EMPTY_FILE)
-    }
-
-    if (error) {
-      onError(error)
-    }
-
-    return parsedFile
-  }
-  catch (error) {
-    console.error(error)
-
-    onError(JsonError)
-
-    return null
-  }
+      return Promise.reject(error)
+    })
 }
 
 
