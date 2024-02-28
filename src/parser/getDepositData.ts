@@ -1,7 +1,7 @@
 import { getBytes } from 'ethers'
 
 import type { DepositData, OnError } from './types'
-import { getWithdrawalCredentials, prefix0x } from './helpers'
+import { getWithdrawalCredentials, prefix0x, createError, ErrorTypes } from './helpers'
 
 
 type Input = {
@@ -28,10 +28,7 @@ const getDepositData = (values: Input): DepositData => {
   catch (error) {
     console.error(error)
 
-    onError({
-      message: 'Failed to parse deposit data public key',
-      type: 'INVALID_PUBLIC_KEY_FORMAT',
-    })
+    onError(createError(ErrorTypes.INVALID_PUBLIC_KEY_FORMAT))
 
     return {
       amount: 0,

@@ -1,6 +1,6 @@
 import { StandardMerkleTree } from '@openzeppelin/merkle-tree'
 
-import type { DepositDataFile, WorkerOutput } from './types'
+import type { DepositDataFile, ParserOutput } from './types'
 
 
 type Input = {
@@ -17,7 +17,7 @@ const getPostMessage = (values: Input) => {
     [ 'bytes', 'uint256' ]
   )
 
-  const postMessage: WorkerOutput = {
+  const postMessage: ParserOutput = {
     merkleRoot: merkleTree.root,
     validators: parsedFile?.length || 0,
     publicKeys: Array.from(pubkeySet) as string[],

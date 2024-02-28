@@ -1,3 +1,6 @@
+import type { Error } from './helpers/errors'
+
+
 export type FileItem = {
   amount: number
   pubkey: string
@@ -8,6 +11,11 @@ export type DepositDataFile = FileItem[]
 
 export type OnError = (error: Error) => void
 
+type Progress = {
+  total: number
+  value: number
+}
+
 export type DepositData = {
   amount: number
   signature: Buffer
@@ -15,36 +23,20 @@ export type DepositData = {
   withdrawalCredentials: Buffer
 }
 
-export type WorkerInput = {
+export type ParserInput = {
   file: File
-  config: Config
-  network: SupportedNetworks
   vaultAddress: string
+  network: SupportedNetworks
+  onProgress: (progress: Progress) => void
+  onErrorCallback?: (error: Error) => void
 }
 
-export type WorkerOutput = {
+export type ParserOutput = {
   validators?: number
   merkleRoot?: string
   publicKeys?: string[]
-  error?: string
-  progress?: {
-    total: number
-    value: number
-  }
+  error?: Error
+  progress?: Progress
 }
 
 export type SupportedNetworks = 'mainnet' | 'goerli' | 'gnosis' | 'holesky'
-
-export type ErrorTypes =
-  'EMPTY_FILE' |
-  'MISSING_FIELDS' |
-  'INVALID_SIGNATURE' |
-  'INVALID_JSON_FORMAT' |
-  'DUPLICATE_PUBLIC_KEYS' |
-  'INVALID_PUBLIC_KEY_FORMAT' |
-  'MERKLE_TREE_GENERATION_ERROR'
-
-export type Error = {
-  message: string
-  type: ErrorTypes
-}

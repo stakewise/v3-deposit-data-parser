@@ -1,5 +1,5 @@
-import { containers, computeDomain, getForkVersion, prefix0x } from './helpers'
-import type { DepositData, OnError, SupportedNetworks, Error } from './types'
+import { containers, computeDomain, getForkVersion, prefix0x, createError, ErrorTypes } from './helpers'
+import type { DepositData, OnError, SupportedNetworks } from './types'
 
 
 // Deposit domain definition according to Ethereum specification
@@ -29,12 +29,7 @@ type Input = {
 const verifySignature = (values: Input) => {
   const { bls, pubkey, signature, depositData, network, onError } = values
 
-  const signatureError: Error = {
-    message: `
-      Failed to verify the deposit data signatures. Please make sure the file is generated for the ${networkNames[network]} network.
-    `,
-    type: 'INVALID_SIGNATURE',
-  }
+  const signatureError = createError(ErrorTypes.INVALID_SIGNATURE, { network: networkNames[network] })
 
   try {
     const currentVersion = getForkVersion(network)

@@ -1,6 +1,6 @@
 import { getBytes } from 'ethers'
 
-import { containers, prefix0x } from './helpers'
+import { containers, prefix0x, createError, ErrorTypes } from './helpers'
 import type { DepositData, OnError } from './types'
 
 
@@ -35,10 +35,7 @@ const getTreeLeaf = (values: Input): Uint8Array => {
   catch (error) {
     console.error(error)
 
-    onError({
-      message: 'Failed to generate the Merkle tree',
-      type: 'MERKLE_TREE_GENERATION_ERROR',
-    })
+    onError(createError(ErrorTypes.MERKLE_TREE_GENERATION_ERROR))
 
     return new Uint8Array()
   }

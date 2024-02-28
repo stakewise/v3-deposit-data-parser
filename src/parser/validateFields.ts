@@ -1,3 +1,5 @@
+import { ErrorTypes, createError } from './helpers'
+
 import type { FileItem, OnError } from './types'
 
 
@@ -25,12 +27,9 @@ const validateFields = (values: Input) => {
   })
 
   if (missingFields.length) {
-    const error = `Failed to verify the deposit data public keys. Missing fields: ${missingFields.join(',')}`
+    const error = createError(ErrorTypes.MISSING_FIELDS, { missingFields: missingFields.join(',') })
 
-    onError({
-      message: error,
-      type: 'MISSING_FIELDS',
-    })
+    onError(error)
   }
 }
 

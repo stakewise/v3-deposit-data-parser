@@ -1,5 +1,7 @@
-import parseJsonFile from './helpers/parseJsonFile'
-import type { DepositDataFile, OnError, Error } from './types'
+import { createError, parseJsonFile, ErrorTypes } from './helpers'
+import type { Error } from './helpers'
+
+import type { DepositDataFile, OnError } from './types'
 
 
 type Input = {
@@ -9,10 +11,7 @@ type Input = {
 
 type Output = DepositDataFile | null
 
-const JsonError: Error = {
-  message: 'Deposit data file must be in JSON format',
-  type: 'INVALID_JSON_FORMAT',
-}
+const JsonError = createError(ErrorTypes.INVALID_JSON_FORMAT)
 
 const validateFile = async (values: Input): Promise<Output> => {
   const { file, onError } = values
@@ -26,10 +25,7 @@ const validateFile = async (values: Input): Promise<Output> => {
       error = JsonError
     }
     else if (parsedFile.length === 0) {
-      error = {
-        message: 'Deposit data file is empty',
-        type: 'EMPTY_FILE',
-      }
+      error = createError(ErrorTypes.EMPTY_FILE)
     }
 
     if (error) {

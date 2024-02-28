@@ -1,6 +1,7 @@
-import { depositDataParser } from 'worker'
-import type { FileItem, WorkerInput, ErrorTypes } from 'worker/types'
+import { depositDataParser } from 'parser'
+import type { FileItem, ParserInput } from 'parser/types'
+import type { ErrorTypes } from 'parser/helpers'
 
 
 export { depositDataParser }
-export type { FileItem, WorkerInput, ErrorTypes }
+export type { FileItem, ParserInput, ErrorTypes }
