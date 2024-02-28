@@ -1,4 +1,4 @@
-import type { Error } from './helpers/errors'
+import type { ParserError } from './helpers/errors'
 
 
 export type FileItem = {
@@ -9,9 +9,9 @@ export type FileItem = {
 
 export type DepositDataFile = FileItem[]
 
-export type OnError = (error: Error) => void
+export type OnError = (error: ParserError) => void
 
-type Progress = {
+export type Progress = {
   total: number
   value: number
 }
@@ -27,15 +27,15 @@ export type ParserInput = {
   file: File
   vaultAddress: string
   network: SupportedNetworks
-  onProgress: (progress: Progress) => void
-  onErrorCallback?: (error: Error) => void
+  onProgress?: (progress: Progress) => void
+  onErrorCallback?: (error: ParserError) => void
 }
 
 export type ParserOutput = {
   validators?: number
   merkleRoot?: string
   publicKeys?: string[]
-  error?: Error
+  error?: ParserError
   progress?: Progress
 }
 

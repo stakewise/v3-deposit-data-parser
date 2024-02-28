@@ -1,5 +1,5 @@
 import { createError, ErrorTypes } from './helpers'
-import type { Error } from './helpers'
+import type { ParserError } from './helpers'
 
 import initBls from './initBls'
 import getTreeLeaf from './getTreeLeaf'
@@ -14,8 +14,8 @@ import type { FileItem, ParserInput } from './types'
 export const depositDataParser = async (input: ParserInput) => {
   const { vaultAddress, network, file, onProgress, onErrorCallback } = input
 
-    const onError = (error: Error) => {
-      if (onErrorCallback) {
+    const onError = (error: ParserError) => {
+      if (typeof onErrorCallback === 'function') {
         onErrorCallback(error)
       }
 
@@ -45,10 +45,12 @@ export const depositDataParser = async (input: ParserInput) => {
           treeLeaves.push(treeLeaf)
 
           if (parsedFile.length > 1000) {
-            onProgress({
-              total: parsedFile.length,
-              value: index + 1,
-            })
+            if (typeof onProgress === 'function') {
+              onProgress({
+                total: parsedFile.length,
+                value: index + 1,
+              })
+            }
           }
         })
 
@@ -59,8 +61,6 @@ export const depositDataParser = async (input: ParserInput) => {
         return getPostMessage({ pubkeySet, parsedFile, treeLeaves })
       }
     } catch (error) {
-      console.error(error)
-
-      onError(createError(ErrorTypes.PROCESSING_ERROR))
+      console.error(`Deposit data error: ${error}`)
     }
 }

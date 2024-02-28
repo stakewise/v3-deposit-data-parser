@@ -27,7 +27,7 @@ const validateFields = (values: Input) => {
   })
 
   if (missingFields.length) {
-    const error = createError(ErrorTypes.MISSING_FIELDS, { missingFields: missingFields.join(',') })
+    const error = createError(ErrorTypes.MISSING_FIELDS, { fields: missingFields.join(',') })
 
     onError(error)
   }

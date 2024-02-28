@@ -39,30 +39,28 @@ self.addEventListener('message', async (event) => {
   const result = await depositDataParser(vaultAddress, network, file, onProgress, onErrorCallback)
 
   postMessage({ result })
+  close()
 })
 
 ```
 #### Deposit data parser Arguments:
 
-| Name | Type      | Required | Description |
-|--------------|-------------|----------|-------------|
-| network      | `Network`   | **Yes**  | Network to which the deposit data belongs. |
-| vaultAddress | `string`    | **Yes**  | The address of the vault for which the deposit data is being parsed. |
-| file         | `File`      | **Yes**  | The File interface provides information about files and allows JavaScript in a web page to access their content. |
-| onProgress   | `Function`  | **Yes** | Callback function that is called with progress information as the file is being parsed. The function is expected to accept an object with `total` and `value` properties, where `total` is the total number of items to process, and `value` is the current number of items processed. |
-| onErrorCallback | `Function` | Optional | Callback function that is called when an error occurs during the parsing process. The function is expected to accept an error object containing `message` and `type` properties. |
+| Name | Type      | Required | Description                                                                                                                                                                                                                                                                            |
+|--------------|-------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| network      | `Network`   | **Yes**  | Network to which the deposit data belongs.                                                                                                                                                                                                                                             |
+| vaultAddress | `string`    | **Yes**  | The address of the vault for which the deposit data is being parsed.                                                                                                                                                                                                                   |
+| file         | `File`      | **Yes**  | The File interface provides information about files and allows JavaScript in a web page to access their content.                                                                                                                                                                       |
+| onProgress   | `Function`  | Optional | Callback function that is called with progress information as the file is being parsed. The function is expected to accept an object with `total` and `value` properties, where `total` is the total number of items to process, and `value` is the current number of items processed. |
+| onErrorCallback | `Function` | Optional | Callback function that is called when an error occurs during the parsing process. The function is expected to accept an error object containing `message` and `type` properties and dynamicValues for create custom error messages.                                                    |
 
-```
 
-```
-#### Worker Errors:
+#### Parser Errors:
 | Type | Message |
 |------------|---------|
 | `EMPTY_FILE` | Deposit data file is empty
-| `PROCESSING_ERROR` | Error processing deposit data. Please try again.
 | `INVALID_JSON_FORMAT` | Deposit data file must be in JSON format
 | `MERKLE_TREE_GENERATION_ERROR` | Failed to generate the Merkle tree
 | `INVALID_PUBLIC_KEY_FORMAT` | Failed to parse deposit data public key
-| `MISSING_FIELDS` | Failed to verify the deposit data public keys. Missing fields: {missingFields}
+| `MISSING_FIELDS` | Failed to verify the deposit data public keys. Missing fields: {fields}
 | `DUPLICATE_PUBLIC_KEYS` | Failed to verify the deposit data public keys. All the entries must be unique.
-| `INVALID_SIGNATURE` | Failed to verify the deposit data signatures. Please make sure the file is generated for the {networkName} network.
+| `INVALID_SIGNATURE` | Failed to verify the deposit data signatures. Please make sure the file is generated for the {network} network.

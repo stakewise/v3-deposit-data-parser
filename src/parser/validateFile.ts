@@ -1,5 +1,5 @@
 import { createError, parseJsonFile, ErrorTypes } from './helpers'
-import type { Error } from './helpers'
+import type { ParserError } from './helpers'
 
 import type { DepositDataFile, OnError } from './types'
 
@@ -19,7 +19,7 @@ const validateFile = async (values: Input): Promise<Output> => {
   try {
     const parsedFile = await parseJsonFile(file)
 
-    let error: Error | null = null
+    let error: ParserError | null = null
 
     if (!Array.isArray(parsedFile)) {
       error = JsonError
