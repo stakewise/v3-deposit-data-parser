@@ -27,19 +27,26 @@ import { depositDataParser } from '@stakewise/v3-deposit-data-parser'
 self.addEventListener('message', async (event) => {
   const { vaultAddress, network, file } = event.data
 
-  const onErrorCallback = (error: Error) => {
+  try {
+    const onProgress = (progress: Progress) => {
+      postMessage({ progress })
+    }
+
+    const result = await depositDataParser({
+      file,
+      vaultAddress,
+      network,
+      onProgress,
+    })
+
+    postMessage({ result })
+  }
+  catch (error) {
     postMessage({ error })
+  }
+  finally {
     close()
   }
-
-  const onProgress = (progress: Progress) => {
-    postMessage({ progress })
-  }
-
-  const result = await depositDataParser(vaultAddress, network, file, onProgress, onErrorCallback)
-
-  postMessage({ result })
-  close()
 })
 
 ```
@@ -51,7 +58,6 @@ self.addEventListener('message', async (event) => {
 | vaultAddress | `string`    | **Yes**  | The address of the vault for which the deposit data is being parsed.                                                                                                                                                                                                                   |
 | file         | `File`      | **Yes**  | The File interface provides information about files and allows JavaScript in a web page to access their content.                                                                                                                                                                       |
 | onProgress   | `Function`  | Optional | Callback function that is called with progress information as the file is being parsed. The function is expected to accept an object with `total` and `value` properties, where `total` is the total number of items to process, and `value` is the current number of items processed. |
-| onErrorCallback | `Function` | Optional | Callback function that is called when an error occurs during the parsing process. The function is expected to accept an error object containing `message` and `type` properties and dynamicValues for create custom error messages.                                                    |
 
 
 #### Parser Errors:
