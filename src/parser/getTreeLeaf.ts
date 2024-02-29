@@ -1,6 +1,6 @@
 import { getBytes } from 'ethers'
 
-import { containers, prefix0x, createError, ErrorTypes } from './helpers'
+import { containers, prefix0x, ParserError, ErrorTypes } from './helpers'
 import type { DepositData } from './types'
 
 
@@ -34,7 +34,7 @@ const getTreeLeaf = (values: Input): Uint8Array => {
   catch (error) {
     console.error(error)
 
-    throw (createError(ErrorTypes.MERKLE_TREE_GENERATION_ERROR))
+    throw new ParserError(ErrorTypes.MERKLE_TREE_GENERATION_ERROR)
   }
 }
 

@@ -1,4 +1,4 @@
-import { ErrorTypes, createError } from './helpers'
+import { ErrorTypes, ParserError } from './helpers'
 
 import type { FileItem } from './types'
 
@@ -26,7 +26,7 @@ const validateFields = (values: Input) => {
   })
 
   if (missingFields.length) {
-    const error = createError(ErrorTypes.MISSING_FIELDS, { fields: missingFields.join(',') })
+    const error = new ParserError(ErrorTypes.MISSING_FIELDS, { fields: missingFields.join(',') })
 
     throw (error)
   }

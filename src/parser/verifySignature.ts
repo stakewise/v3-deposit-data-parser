@@ -1,4 +1,4 @@
-import { containers, computeDomain, getForkVersion, prefix0x, createError, ErrorTypes } from './helpers'
+import { containers, computeDomain, getForkVersion, prefix0x, ParserError, ErrorTypes } from './helpers'
 import type { DepositData, SupportedNetworks } from './types'
 
 
@@ -28,7 +28,7 @@ type Input = {
 const verifySignature = (values: Input) => {
   const { bls, pubkey, signature, depositData, network } = values
 
-  const signatureError = createError(ErrorTypes.INVALID_SIGNATURE, { network: networkNames[network] })
+  const signatureError = new ParserError(ErrorTypes.INVALID_SIGNATURE, { network: networkNames[network] })
 
   try {
     const currentVersion = getForkVersion(network)

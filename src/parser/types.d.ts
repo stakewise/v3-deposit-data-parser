@@ -1,4 +1,4 @@
-import type { ParserError } from './helpers/errors'
+import ParserError from './helpers/errors'
 
 
 type FileItem = {

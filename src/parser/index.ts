@@ -1,4 +1,4 @@
-import { createError, ErrorTypes } from './helpers'
+import { ParserError, ErrorTypes } from './helpers'
 
 import initBls from './initBls'
 import getTreeLeaf from './getTreeLeaf'
@@ -45,7 +45,7 @@ export const depositDataParser = async (input: ParserInput) => {
     })
 
     if (pubkeySet.size !== parsedFile?.length) {
-      throw (createError(ErrorTypes.DUPLICATE_PUBLIC_KEYS))
+      throw new ParserError(ErrorTypes.DUPLICATE_PUBLIC_KEYS)
     }
 
     return getPostMessage({ pubkeySet, parsedFile, treeLeaves })

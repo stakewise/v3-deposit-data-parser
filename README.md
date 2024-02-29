@@ -20,7 +20,9 @@
 npm i @stakewise/v3-deposit-data-parser
 ```
 
-## Usage
+## Usage example
+To ensure optimal performance and responsiveness, **StakeWise Deposit Data Parser** is optimized for execution within a Web Worker. This allows your application to process data without blocking the main thread, keeping the UI smooth and responsive, even during intensive computations.
+
 ```typescript
 import { depositDataParser } from '@stakewise/v3-deposit-data-parser'
 
@@ -42,7 +44,14 @@ self.addEventListener('message', async (event) => {
     postMessage({ result })
   }
   catch (error) {
-    postMessage({ error })
+    if (error instanceof ParserError) {
+      const parserError: ParserError = { ...error }
+      
+      postMessage({ error: parserError })
+    }
+    else {
+      postMessage({ error })
+    }
   }
   finally {
     close()

@@ -1,4 +1,4 @@
-import { createError, parseJsonFile, ErrorTypes } from './helpers'
+import { ParserError, parseJsonFile, ErrorTypes } from './helpers'
 
 import type { DepositDataFile } from './types'
 
@@ -7,7 +7,7 @@ type Input = {
   file: File
 }
 
-const JsonError = createError(ErrorTypes.INVALID_JSON_FORMAT)
+const JsonError = new ParserError(ErrorTypes.INVALID_JSON_FORMAT)
 
 const validateFile = (values: Input): Promise<DepositDataFile> => {
   const { file } = values
@@ -18,7 +18,7 @@ const validateFile = (values: Input): Promise<DepositDataFile> => {
         return Promise.reject(JsonError)
       }
       else if (parsedFile.length === 0) {
-        return Promise.reject(createError(ErrorTypes.EMPTY_FILE))
+        return Promise.reject(new ParserError(ErrorTypes.EMPTY_FILE))
       }
 
       return parsedFile

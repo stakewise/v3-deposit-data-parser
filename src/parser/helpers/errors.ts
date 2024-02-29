@@ -1,11 +1,5 @@
 type DynamicValues = Record<string, any>
 
-export type ParserError = {
-  message: string
-  type: ErrorTypes
-  dynamicValues?: DynamicValues
-}
-
 export enum ErrorTypes {
   EMPTY_FILE = 'EMPTY_FILE',
   MISSING_FIELDS = 'MISSING_FIELDS',
@@ -28,17 +22,33 @@ export const ErrorMessages: Record<ErrorTypes, string> = {
   `,
 }
 
-const createError = (type: ErrorTypes, dynamicValues?: DynamicValues): ParserError => {
-  let message = ErrorMessages[type]
+class ParserError extends Error {
+  public title: string
+  public type: ErrorTypes
+  public dynamicValues?: DynamicValues
 
-  if (dynamicValues) {
-    Object.keys(dynamicValues).forEach(key => {
-      message = message.replace(`{${key}}`, dynamicValues[key])
-    })
+  constructor(type: ErrorTypes, dynamicValues?: DynamicValues) {
+    const message = ParserError.formatMessage(type, dynamicValues)
+
+    super(message)
+
+    this.type = type
+    this.title = message
+    this.name = 'StakeWise Parser Error'
+    this.dynamicValues = dynamicValues
   }
 
-  return { message, type, dynamicValues }
+  private static formatMessage(type: ErrorTypes, dynamicValues?: DynamicValues): string {
+    let message = ErrorMessages[type]
+
+    if (dynamicValues) {
+      Object.keys(dynamicValues).forEach((key) => {
+        message = message.replace(`{${key}}`, dynamicValues[key])
+      })
+    }
+
+    return message
+  }
 }
 
-
-export default createError
+export default ParserError
