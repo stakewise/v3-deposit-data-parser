@@ -8,7 +8,7 @@
 
 ## Features
 
-- **File Validation:** Ensures the input file meets specified criteria, effectively preventing the processing of invalid or corrupted files.
+- **Json Validation:** Ensures the input data meets specified criteria, effectively preventing the processing of invalid or corrupted json.
 - **Deposit Data Extraction:** Parses deposit data from files, preparing it for further processing or verification.
 - **Public Key Verification:** Validates the uniqueness and format of public keys within the deposit data to ensure data integrity.
 - **Signature Verification:** Leverages BLS (Boneh-Lynn-Shacham) signatures to authenticate deposit data against given public keys.
@@ -35,7 +35,7 @@ self.addEventListener('message', async (event) => {
     }
 
     const result = await depositDataParser({
-      file,
+      data,
       vaultAddress,
       network,
       onProgress,
@@ -61,11 +61,11 @@ self.addEventListener('message', async (event) => {
 ```
 #### Deposit data parser Arguments:
 
-| Name | Type      | Required | Description                                                                                                                                                                                                                                                                            |
+| Name         | Type      | Required | Description                                                                                                                                                                                                                                                                            |
 |--------------|-------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | network      | `Network`   | **Yes**  | Network to which the deposit data belongs.                                                                                                                                                                                                                                             |
 | vaultAddress | `string`    | **Yes**  | The address of the vault for which the deposit data is being parsed.                                                                                                                                                                                                                   |
-| file         | `File`      | **Yes**  | The File interface provides information about files and allows JavaScript in a web page to access their content.                                                                                                                                                                       |
+| data         | `DepositDataFile` | **Yes**  | Data that contains basic information about the file to be downloaded.                                                                                                                                                                                                                  |
 | onProgress   | `Function`  | Optional | Callback function that is called with progress information as the file is being parsed. The function is expected to accept an object with `total` and `value` properties, where `total` is the total number of items to process, and `value` is the current number of items processed. |
 
 

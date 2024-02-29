@@ -22,7 +22,7 @@ export type DepositData = {
 }
 
 export type ParserInput = {
-  file: File
+  data: DepositDataFile
   vaultAddress: string
   network: SupportedNetworks
   onProgress?: (progress: Progress) => void
