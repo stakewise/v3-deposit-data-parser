@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "name": "@stakewise/v3-deposit-data-parser",
   "description": "v3-deposit-data-parser",
