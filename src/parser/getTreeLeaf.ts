@@ -1,6 +1,4 @@
-import { getBytes } from 'ethers'
-
-import { containers, prefix0x, ParserError, ErrorTypes } from './helpers'
+import { containers, prefix0x, ParserError, ErrorTypes, getBytes } from './helpers'
 import type { DepositData } from './types'
 
 

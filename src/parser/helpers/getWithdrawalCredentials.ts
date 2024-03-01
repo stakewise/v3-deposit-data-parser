@@ -1,4 +1,4 @@
-import { getBytes } from 'ethers'
+import { getBytes } from './getBytes'
 
 
 // is a one-byte array with the number 1, which indicates that
