@@ -12,7 +12,6 @@ const genesisValidatorsRoot = Buffer.alloc(32, 0)
 // Network names
 const networkNames: Record<SupportedNetworks, string> = {
   'holesky': 'Holesky Testnet',
-  'goerli': 'Goerli Testnet',
   'gnosis': 'Gnosis Chain',
   'mainnet': 'Ethereum',
 }

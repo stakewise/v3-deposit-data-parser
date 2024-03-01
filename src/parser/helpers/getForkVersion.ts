@@ -7,7 +7,6 @@ import type { SupportedNetworks } from '../types'
 const forkVersions: Record<SupportedNetworks, string> = {
   'holesky': '0x01017000',
   'mainnet': '0x00000000',
-  'goerli': '0x00001020',
   'gnosis': '0x00000064',
 }
 
