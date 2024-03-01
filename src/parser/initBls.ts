@@ -1,5 +1,5 @@
 const initBls = async () => {
-  const bls = require('bls-eth-wasm/browser')
+  const bls = await import('bls-eth-wasm')
 
   await bls.init(bls.BLS12_381)
 
