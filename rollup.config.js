@@ -31,7 +31,9 @@ const config = [
     plugins: [
       // @ts-ignore: this plugin has types for old version of jest :(
       peerDepsExternal(),
-      resolve(),
+      resolve({
+        browser: true,
+      }),
       commonjs(),
       typescript({
         noEmitOnError: true,
