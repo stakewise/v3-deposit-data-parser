@@ -1,4 +1,4 @@
-import makeError, { CodedEthersError, ErrorInfo, ErrorCode } from './errors';
+import makeError, { CodedEthersError, ErrorInfo, ErrorCode } from './errors'
 
 
 export const assert: <K extends ErrorCode, T extends CodedEthersError<K>>(
