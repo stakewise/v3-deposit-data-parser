@@ -3,6 +3,7 @@ import del from 'rollup-plugin-delete'
 import { dts } from 'rollup-plugin-dts'
 import terser from '@rollup/plugin-terser'
 import commonjs from '@rollup/plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
 import typescript from '@rollup/plugin-typescript'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 
@@ -30,6 +31,7 @@ const config = [
     plugins: [
       // @ts-ignore: this plugin has types for old version of jest :(
       peerDepsExternal(),
+      resolve(),
       commonjs(),
       typescript({
         noEmitOnError: true,
