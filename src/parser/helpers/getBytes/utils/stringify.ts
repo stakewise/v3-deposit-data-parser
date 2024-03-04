@@ -9,11 +9,14 @@ const stringify = (value: any): any => {
 
   if (value instanceof Uint8Array) {
     const HEX = "0123456789abcdef"
+
     let result = "0x"
+
     for (let i = 0; i < value.length; i++) {
       result += HEX[value[i] >> 4]
       result += HEX[value[i] & 0xf]
     }
+
     return result
   }
 
@@ -33,6 +36,7 @@ const stringify = (value: any): any => {
     case "object": {
       const keys = Object.keys(value)
       keys.sort()
+
       return "{ " + keys.map((k) => `${ stringify(k) }: ${ stringify(value[k]) }`).join(", ") + " }"
     }
   }

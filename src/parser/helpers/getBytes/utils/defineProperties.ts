@@ -10,6 +10,7 @@ const defineProperties = <T>(
     const value = values[key]
 
     const type = types ? types[key] : null
+
     if (type) {
       checkType(value, type, key)
     }

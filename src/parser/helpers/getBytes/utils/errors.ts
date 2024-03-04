@@ -41,6 +41,7 @@ const makeError = <K extends ErrorCode, T extends CodedEthersError<K>>(
   info?: ErrorInfo<T>
 ): T => {
   const details: Array<string> = []
+
   if (info) {
     if ("message" in info || "code" in info || "name" in info) {
       throw new Error(`value will overwrite populated values: ${stringify(info)}`)
@@ -50,6 +51,7 @@ const makeError = <K extends ErrorCode, T extends CodedEthersError<K>>(
       details.push(`${key}=${stringify(value)}`)
     }
   }
+
   details.push(`code=${code}`)
 
   if (details.length) {
@@ -57,6 +59,7 @@ const makeError = <K extends ErrorCode, T extends CodedEthersError<K>>(
   }
 
   let error: EthersError
+
   switch (code) {
     case "INVALID_ARGUMENT":
       error = new TypeError(message) as EthersError
