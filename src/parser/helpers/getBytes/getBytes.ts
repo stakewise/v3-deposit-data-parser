@@ -3,9 +3,8 @@ import { assertArgument } from './utils'
 
 type BytesLike = string | Uint8Array
 
-const getBytes = (value: BytesLike, name?: string, copy?: boolean): Uint8Array => {
+const getBytes = (value: BytesLike): Uint8Array => {
   if (value instanceof Uint8Array) {
-    if (copy) { return new Uint8Array(value) }
     return value
   }
 
@@ -19,7 +18,7 @@ const getBytes = (value: BytesLike, name?: string, copy?: boolean): Uint8Array =
     return result
   }
 
-  assertArgument(false, "invalid BytesLike value", name || "value", value)
+  assertArgument(false, "invalid BytesLike value", "value", value)
 }
 
 export default getBytes

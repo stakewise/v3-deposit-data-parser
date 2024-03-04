@@ -1,7 +1,7 @@
 import checkType from './checkType'
 
 
-export const defineProperties = <T>(
+const defineProperties = <T>(
   target: T,
   values: { [K in keyof T]?: T[K] },
   types?: { [K in keyof T]?: string }

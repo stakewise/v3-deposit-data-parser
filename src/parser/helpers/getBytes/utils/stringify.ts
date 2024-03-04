@@ -1,5 +1,7 @@
 const stringify = (value: any): any => {
-  if (value == null) { return "null" }
+  if (value == null) {
+    return "null"
+  }
 
   if (Array.isArray(value)) {
     return "[ " + (value.map(stringify)).join(", ") + " ]"
