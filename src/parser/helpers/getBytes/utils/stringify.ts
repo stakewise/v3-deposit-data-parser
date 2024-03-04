@@ -20,24 +20,25 @@ const stringify = (value: any): any => {
     return result
   }
 
-  if (typeof(value) === "object" && typeof(value.toJSON) === "function") {
+  if (typeof(value) === 'object' && typeof(value.toJSON) === 'function') {
     return stringify(value.toJSON())
   }
 
   switch (typeof(value)) {
-    case "boolean": case "symbol":
+    case 'boolean':
+    case 'symbol':
       return value.toString()
-    case "bigint":
+    case 'bigint':
       return BigInt(value).toString()
-    case "number":
+    case 'number':
       return (value).toString()
-    case "string":
+    case 'string':
       return JSON.stringify(value)
-    case "object": {
+    case 'object': {
       const keys = Object.keys(value)
       keys.sort()
 
-      return "{ " + keys.map((k) => `${ stringify(k) }: ${ stringify(value[k]) }`).join(", ") + " }"
+      return '{ " + keys.map((k) => `${ stringify(k) }: ${ stringify(value[k]) }`).join(", ") + " }'
     }
   }
 

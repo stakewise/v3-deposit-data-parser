@@ -8,7 +8,7 @@ const getBytes = (value: BytesLike): Uint8Array => {
     return value
   }
 
-  if (typeof(value) === "string" && value.match(/^0x([0-9a-f][0-9a-f])*$/i)) {
+  if (typeof(value) === 'string' && value.match(/^0x([0-9a-f][0-9a-f])*$/i)) {
     const result = new Uint8Array((value.length - 2) / 2)
 
     let offset = 2
@@ -21,7 +21,7 @@ const getBytes = (value: BytesLike): Uint8Array => {
     return result
   }
 
-  assertArgument(false, "invalid BytesLike value", "value", value)
+  assertArgument(false, 'invalid BytesLike value', 'value', value)
 }
 
 export default getBytes

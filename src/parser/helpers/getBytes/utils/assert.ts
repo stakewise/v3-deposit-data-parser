@@ -18,7 +18,7 @@ export const assertArgument: (
   name: string,
   value: unknown
 ) => asserts check = (check, message, name, value) => {
-  assert(check, message, "INVALID_ARGUMENT", { argument: name, value })
+  assert(check, message, 'INVALID_ARGUMENT', { argument: name, value })
 }
 
 export default assertArgument
