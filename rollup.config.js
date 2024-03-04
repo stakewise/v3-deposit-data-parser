@@ -20,12 +20,14 @@ const config = [
         exports: 'named',
         sourcemap: true,
         format: 'es',
+        inlineDynamicImports: true,
       },
       {
         name: pkg.name,
         file: pkg.main,
         sourcemap: true,
         format: 'cjs',
+        inlineDynamicImports: true,
       },
     ],
     plugins: [
