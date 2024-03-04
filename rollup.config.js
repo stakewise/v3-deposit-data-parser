@@ -31,12 +31,10 @@ const config = [
     plugins: [
       // @ts-ignore: this plugin has types for old version of jest :(
       peerDepsExternal(),
-      resolve(),
-      commonjs({
-        dynamicRequireTargets: [
-          'node_modules/crypto/**',
-        ],
+      resolve({
+        browser: true,
       }),
+      commonjs(),
       typescript({
         noEmitOnError: true,
         tsconfig: './tsconfig.json',
