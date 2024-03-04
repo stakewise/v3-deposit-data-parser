@@ -4,13 +4,13 @@ const stringify = (value: any): any => {
   }
 
   if (Array.isArray(value)) {
-    return "[ " + (value.map(stringify)).join(", ") + " ]"
+    return '[ " + (value.map(stringify)).join(", ") + " ]'
   }
 
   if (value instanceof Uint8Array) {
-    const HEX = "0123456789abcdef"
+    const HEX = '0123456789abcdef'
 
-    let result = "0x"
+    let result = '0x'
 
     for (let i = 0; i < value.length; i++) {
       result += HEX[value[i] >> 4]

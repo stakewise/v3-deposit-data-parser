@@ -6,34 +6,35 @@ export type ErrorInfo<T> = Omit<T, 'code' | 'name' | 'message'>
 
 export type ErrorCode = 'BUFFER_OVERRUN' |  'NUMERIC_FAULT' | 'INVALID_ARGUMENT'
 
-export interface EthersError<T extends ErrorCode = ErrorCode> extends Error {
-  code: ErrorCode;
-  info?: Record<string, any>;
-  error?: Error;
+type EthersError<T extends ErrorCode = ErrorCode> = Error & {
+  code: T
+  info?: Record<string, any>
+  error?: Error
 }
 
-export interface BufferOverrunError extends EthersError<'BUFFER_OVERRUN'> {
+type BufferOverrunError = EthersError<'BUFFER_OVERRUN'> & {
   buffer: Uint8Array;
-  length: number;
-  offset: number;
+  length: number
+  offset: number
 }
 
-export interface InvalidArgumentError extends EthersError<'INVALID_ARGUMENT'> {
-  argument: string;
-  value: any;
+type InvalidArgumentError = EthersError<'INVALID_ARGUMENT'> & {
+  argument: string
+  value: any
   info?: Record<string, any>
 }
 
-export interface NumericFaultError extends EthersError<'NUMERIC_FAULT'> {
-  operation: string;
-  fault: string;
-  value: any;
+type NumericFaultError = EthersError<'NUMERIC_FAULT'> & {
+  operation: string
+  fault: string
+  value: any
 }
 
 export type CodedEthersError<T> =
   T extends 'BUFFER_OVERRUN' ? BufferOverrunError:
-    T extends 'NUMERIC_FAULT' ? NumericFaultError:
-      T extends 'INVALID_ARGUMENT' ? InvalidArgumentError: never;
+  T extends 'NUMERIC_FAULT' ? NumericFaultError:
+  T extends 'INVALID_ARGUMENT' ? InvalidArgumentError:
+  never
 
 const makeError = <K extends ErrorCode, T extends CodedEthersError<K>>(
   message: string,
