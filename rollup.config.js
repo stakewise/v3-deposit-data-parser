@@ -20,22 +20,17 @@ const config = [
         exports: 'named',
         sourcemap: true,
         format: 'es',
-        inlineDynamicImports: true,
       },
       {
         name: pkg.name,
         file: pkg.main,
         sourcemap: true,
         format: 'cjs',
-        inlineDynamicImports: true,
       },
     ],
     plugins: [
       // @ts-ignore: this plugin has types for old version of jest :(
       peerDepsExternal(),
-      resolve({
-        browser: true,
-      }),
       commonjs(),
       typescript({
         noEmitOnError: true,
