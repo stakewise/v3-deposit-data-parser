@@ -1,4 +1,4 @@
-import { getBytes } from 'ethers'
+import { getBytes } from './getBytes'
 
 import type { SupportedNetworks } from '../types'
 

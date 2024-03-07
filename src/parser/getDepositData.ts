@@ -1,7 +1,5 @@
-import { getBytes } from 'ethers'
-
 import type { DepositData } from './types'
-import { getWithdrawalCredentials, prefix0x, ParserError, ErrorTypes } from './helpers'
+import { getWithdrawalCredentials, prefix0x, ParserError, ErrorTypes, getBytes } from './helpers'
 
 
 type Input = {

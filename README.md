@@ -6,6 +6,9 @@
 
 **StakeWise Deposit Data Parser** is a comprehensive TypeScript package designed to facilitate the processing and validation of deposit data files within blockchain applications. Tailored for developers working on staking platforms, blockchain validators, or any applications requiring meticulous deposit data verification and processing, particularly in the context of the StakeWise ecosystem.
 
+![Version](https://img.shields.io/npm/v/@stakewise/v3-deposit-data-parser)
+![Size](https://img.shields.io/bundlephobia/min/@stakewise/v3-deposit-data-parser?label=Size)
+
 ## Features
 
 - **Json Validation:** Ensures the input data meets specified criteria, effectively preventing the processing of invalid or corrupted json.
