@@ -1,7 +1,7 @@
-const initBls = async () => {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const bls = require('bls-eth-wasm')
+import bls from 'bls-eth-wasm'
 
+
+const initBls = async () => {
   await bls.init(bls.BLS12_381)
 
   return bls
