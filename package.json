@@ -48,8 +48,5 @@
     "rollup-plugin-dts": "6.0.2",
     "rollup-plugin-peer-deps-external": "2.2.4",
     "typescript": "5.1.6"
-  },
-  "dependencies": {
-    "crypto-browserify": "3.12.0"
   }
 }
