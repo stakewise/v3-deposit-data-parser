@@ -34,11 +34,7 @@ const config = [
       // @ts-ignore: this plugin has types for old version of jest :(
       peerDepsExternal(),
       resolve(),
-      commonjs({
-        dynamicRequireTargets: [
-          'node_modules/bls-eth-wasm/**',
-        ],
-      }),
+      commonjs(),
       typescript({
         noEmitOnError: true,
         tsconfig: './tsconfig.json',
