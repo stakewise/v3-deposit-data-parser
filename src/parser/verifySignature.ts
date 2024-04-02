@@ -12,6 +12,7 @@ const genesisValidatorsRoot = Buffer.alloc(32, 0)
 // Network names
 const networkNames: Record<SupportedNetworks, string> = {
   'holesky': 'Holesky Testnet',
+  'chiado': 'Chiado Testnet',
   'gnosis': 'Gnosis Chain',
   'mainnet': 'Ethereum',
 }
@@ -35,8 +36,6 @@ const verifySignature = (values: Input) => {
 
     const objectRoot = containers.depositMessage.hashTreeRoot(depositData)
     const signingRoot = containers.signingData.hashTreeRoot({ objectRoot, domain })
-
-    console.log('verifySignature bls ---->>', bls)
 
     const pub = bls.deserializeHexStrToPublicKey(prefix0x.remove(pubkey))
     const sig = bls.deserializeHexStrToSignature(prefix0x.remove(signature))
