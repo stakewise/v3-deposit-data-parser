@@ -1,5 +1,5 @@
 const initBls = async () => {
-  const bls = await import('bls-eth-wasm')
+  const bls = await import('bls-eth-wasm/src/index.js')
 
   console.log('bls ----', bls)
 
