@@ -4,18 +4,19 @@ import { getWithdrawalCredentials, prefix0x, ParserError, ErrorTypes, getBytes }
 
 type Input = {
   pubkey: string
+  amount: number
   vaultAddress: string
 }
 
 const getDepositData = (values: Input): DepositData => {
-  const { pubkey, vaultAddress } = values
+  const { pubkey, vaultAddress, amount } = values
 
   try {
     const withdrawalCredentials = getWithdrawalCredentials(vaultAddress)
 
     const depositData = {
+      amount, // 32 ETH in GWEI
       pubkey: getBytes(prefix0x.add(pubkey)),
-      amount: 32000000000, // 32 ETH in GWEI
       signature: Buffer.alloc(0),
       withdrawalCredentials,
     }

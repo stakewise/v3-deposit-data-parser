@@ -21,11 +21,11 @@ export const depositDataParser = async (input: ParserInput) => {
 
   parsedFile.forEach((item: FileItem, index) => {
     console.log('item', item)
-    const { pubkey, signature } = item
+    const { pubkey, signature, amount } = item
 
     validateFields({ item })
 
-    const depositData = getDepositData({ pubkey, vaultAddress })
+    const depositData = getDepositData({ pubkey, vaultAddress, amount })
 
     verifySignature({ bls, pubkey, signature, depositData, network })
 
