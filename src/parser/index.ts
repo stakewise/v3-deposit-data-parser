@@ -20,6 +20,7 @@ export const depositDataParser = async (input: ParserInput) => {
   const treeLeaves: Uint8Array[] = []
 
   parsedFile.forEach((item: FileItem, index) => {
+    console.log('item', item)
     const { pubkey, signature } = item
 
     validateFields({ item })

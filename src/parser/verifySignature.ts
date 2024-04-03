@@ -28,26 +28,17 @@ type Input = {
 const verifySignature = (values: Input) => {
   const { bls, pubkey, signature, depositData, network } = values
 
-  console.log('values =>>>:', values)
-
   const signatureError = new ParserError(ErrorTypes.INVALID_SIGNATURE, { network: networkNames[network] })
 
   try {
     const currentVersion = getForkVersion(network)
-    console.log('currentVersion =>>>:', currentVersion)
     const domain = computeDomain({ genesisValidatorsRoot, currentVersion, domainType })
-    console.log('domain =>>>:', domain)
     const objectRoot = containers.depositMessage.hashTreeRoot(depositData)
-    console.log('objectRoot =>>>:', objectRoot)
     const signingRoot = containers.signingData.hashTreeRoot({ objectRoot, domain })
-    console.log('signingRoot =>>>:', signingRoot)
 
     const pub = bls.deserializeHexStrToPublicKey(prefix0x.remove(pubkey))
-    console.log('pub =>>>:', pub)
     const sig = bls.deserializeHexStrToSignature(prefix0x.remove(signature))
-    console.log('sig =>>>:', sig)
     const isVerifiedSignature = pub.verify(sig, signingRoot)
-    console.log('isVerifiedSignature =>>>:', isVerifiedSignature)
 
     if (!isVerifiedSignature) {
       throw (signatureError)
