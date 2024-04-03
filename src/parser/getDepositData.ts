@@ -10,6 +10,8 @@ type Input = {
 const getDepositData = (values: Input): DepositData => {
   const { pubkey, vaultAddress } = values
 
+  console.log('values:', values)
+
   try {
     const withdrawalCredentials = getWithdrawalCredentials(vaultAddress)
 
