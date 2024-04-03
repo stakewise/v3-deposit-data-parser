@@ -20,11 +20,11 @@ export const depositDataParser = async (input: ParserInput) => {
   const treeLeaves: Uint8Array[] = []
 
   parsedFile.forEach((item: FileItem, index) => {
-    const { pubkey, signature, amount } = item
+    const { pubkey, signature } = item
 
     validateFields({ item })
 
-    const depositData = getDepositData({ pubkey, vaultAddress, amount })
+    const depositData = getDepositData({ pubkey, vaultAddress, network })
 
     verifySignature({ bls, pubkey, signature, depositData, network })
 

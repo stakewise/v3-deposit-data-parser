@@ -1,21 +1,21 @@
-import type { DepositData } from './types'
-import { getWithdrawalCredentials, prefix0x, ParserError, ErrorTypes, getBytes } from './helpers'
+import { DepositData, SupportedNetworks } from './types'
+import { getWithdrawalCredentials, prefix0x, ParserError, ErrorTypes, getBytes, getAmount } from './helpers'
 
 
 type Input = {
   pubkey: string
-  amount: number
   vaultAddress: string
+  network: SupportedNetworks
 }
 
 const getDepositData = (values: Input): DepositData => {
-  const { pubkey, vaultAddress, amount } = values
+  const { pubkey, vaultAddress, network } = values
 
   try {
     const withdrawalCredentials = getWithdrawalCredentials(vaultAddress)
 
     const depositData = {
-      amount,
+      amount: getAmount(network),
       pubkey: getBytes(prefix0x.add(pubkey)),
       signature: Buffer.alloc(0),
       withdrawalCredentials,
