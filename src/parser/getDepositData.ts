@@ -15,7 +15,7 @@ const getDepositData = (values: Input): DepositData => {
     const withdrawalCredentials = getWithdrawalCredentials(vaultAddress)
 
     const depositData = {
-      amount, // 32 ETH in GWEI
+      amount,
       pubkey: getBytes(prefix0x.add(pubkey)),
       signature: Buffer.alloc(0),
       withdrawalCredentials,
