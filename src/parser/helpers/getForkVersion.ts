@@ -8,6 +8,7 @@ const forkVersions: Record<SupportedNetworks, string> = {
   'holesky': '0x01017000',
   'mainnet': '0x00000000',
   'gnosis': '0x00000064',
+  'chiado': '0x0000006f',
 }
 
 const getForkVersion = (network: SupportedNetworks) => getBytes(forkVersions[network])

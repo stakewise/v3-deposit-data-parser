@@ -24,7 +24,7 @@ export const depositDataParser = async (input: ParserInput) => {
 
     validateFields({ item })
 
-    const depositData = getDepositData({ pubkey, vaultAddress })
+    const depositData = getDepositData({ pubkey, vaultAddress, network })
 
     verifySignature({ bls, pubkey, signature, depositData, network })
 

@@ -36,4 +36,4 @@ export type ParserOutput = {
   progress?: Progress
 }
 
-export type SupportedNetworks = 'mainnet' | 'gnosis' | 'holesky'
+export type SupportedNetworks = 'mainnet' | 'gnosis' | 'holesky' | 'chiado'
