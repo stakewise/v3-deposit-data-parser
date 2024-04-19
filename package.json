@@ -10,8 +10,8 @@
   "typings": "dist/index.d.ts",
   "module": "dist/index.esm.js",
   "scripts": {
-    "build": "rm -rf ./dist && npm run rollup",
     "test": "jest --clearCache && jest --onlyChanged",
+    "build": "npm run test && rm -rf ./dist && npm run rollup",
     "rollup": "rollup --config rollup.config.js --bundleConfigAsCjs"
   },
   "files": [

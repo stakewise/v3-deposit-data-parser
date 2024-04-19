@@ -1,7 +1,7 @@
 import ParserError from './helpers/errors'
 
 
-type FileItem = {
+export type FileItem = {
   amount: number
   pubkey: string
   signature: string
