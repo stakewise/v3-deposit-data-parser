@@ -10,7 +10,7 @@ const domainType = Uint8Array.from([ 3, 0, 0, 0 ])
 const genesisValidatorsRoot = Buffer.alloc(32, 0)
 
 // Network names
-const networkNames: Record<SupportedNetworks, string> = {
+export const networkNames: Record<SupportedNetworks, string> = {
   'holesky': 'Holesky Testnet',
   'chiado': 'Chiado Testnet',
   'gnosis': 'Gnosis Chain',

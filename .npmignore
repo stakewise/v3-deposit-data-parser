@@ -1,5 +1,8 @@
 src
 cache
+tests
 scripts
+jest.config.js
 package-lock.json
 tsconfig.json
+*.test.ts
