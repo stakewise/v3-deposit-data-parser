@@ -2,13 +2,13 @@ import { DepositData, SupportedNetworks } from './types'
 import { getWithdrawalCredentials, prefix0x, ParserError, ErrorTypes, getBytes, getAmount } from './helpers'
 
 
-type Input = {
+export type DepositDataInput = {
   pubkey: string
   vaultAddress: string
   network: SupportedNetworks
 }
 
-const getDepositData = (values: Input): DepositData => {
+const getDepositData = (values: DepositDataInput): DepositData => {
   const { pubkey, vaultAddress, network } = values
 
   try {
