@@ -25,6 +25,13 @@ describe('depositDataParser',() => {
     await expect(depositDataParser(validInput)).resolves.toEqual(validOutput)
   })
 
+  it('throws ParserError to verify the deposit duplicate public keys', async () => {
+    const errorText = new ParserError(ErrorTypes.DUPLICATE_PUBLIC_KEYS)
+    const duplicatedData = mockData.concat(mockData)
+
+    await expect(depositDataParser({ ...validInput, data: duplicatedData })).rejects.toThrow(errorText)
+  })
+
   it('throws ParserError to verify the deposit data signatures', async () => {
     // eslint-disable-next-line max-len
     const invalidSignature = 'a18efb4181ed5a009443086b6d2c4998aad6101dc969adbf2af7bd72335cca0e6e4707e50331f338d57cbaf58c1170c517891244ee83939cdbb704189b4b7614b71c8433af0c93b914cccd995c95d832bcc5f98eefde21a4df2f99ac63ab7f0d'

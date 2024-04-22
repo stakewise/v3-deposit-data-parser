@@ -2,7 +2,7 @@ import { containers, prefix0x, ParserError, ErrorTypes, getBytes } from './helpe
 import type { DepositData } from './types'
 
 
-type Input = {
+export type TreeLeafInput = {
   pubkey: string
   signature: string
   depositData: DepositData
@@ -10,7 +10,7 @@ type Input = {
 
 // Creates an array concatenating pubkey, signature, and hashTreeRoot for a given deposit data
 // This array is used to create a Merkle tree and load it into IPFS
-const getTreeLeaf = (values: Input): Uint8Array => {
+const getTreeLeaf = (values: TreeLeafInput): Uint8Array => {
   const { depositData, pubkey, signature } = values
 
   try {
