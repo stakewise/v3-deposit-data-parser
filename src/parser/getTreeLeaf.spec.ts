@@ -3,15 +3,15 @@ import type { TreeLeafInput } from './getTreeLeaf'
 import getTreeLeaf from './getTreeLeaf'
 
 
-const testData = mockData[0]
+const { pubkey, signature } = mockData[0]
 
 const validInput: TreeLeafInput = {
-  pubkey: testData.pubkey,
-  signature: testData.signature,
+  pubkey,
+  signature,
   depositData: {
     signature: Buffer.alloc(0),
-    amount: getAmount(testData.network_name),
-    pubkey: getBytes(prefix0x.add(testData.pubkey)),
+    amount: getAmount('holesky'),
+    pubkey: getBytes(prefix0x.add(pubkey)),
     withdrawalCredentials: getWithdrawalCredentials('0x9b6a6867d222d62dc301528190e3984d60adb06b'),
   },
 }

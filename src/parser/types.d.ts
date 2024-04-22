@@ -5,12 +5,6 @@ export type FileItem = {
   amount: number
   pubkey: string
   signature: string
-  fork_version: string
-  deposit_data_root: string
-  deposit_cli_version: string
-  deposit_message_root: string
-  withdrawal_credentials: string
-  network_name: SupportedNetworks
 }
 
 export type DepositDataFile = FileItem[]
