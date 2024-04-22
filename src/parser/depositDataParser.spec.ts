@@ -1,4 +1,4 @@
-import type { FileItem, SupportedNetworks, ParserInput } from './types'
+import type { FileItem, SupportedNetworks, ParserInput, ParserOutput } from './types'
 import { ErrorTypes, mockData, ParserError } from './helpers'
 import { networkNames } from './verifySignature'
 import { depositDataParser } from './index'
@@ -13,14 +13,16 @@ const validInput: ParserInput = {
   onProgress: jest.fn(),
 }
 
+const validOutput: ParserOutput = {
+  publicKeys: [ 'acb0ab0fd445b9df30b49b100e6f9b164ef8c3ca6f6edc6801af7b96cd183b60f5f0be959229d6c5981505a04d2711c4' ],
+  merkleRoot: '0x406de60516154112c876f7250d8b289d4e3d840074e8cf755922dd5d3c75d1c0',
+  validators: 1,
+}
+
 describe('depositDataParser',() => {
 
   it('processes valid input without throwing errors ', async() => {
-    await expect(depositDataParser(validInput)).resolves.toEqual({
-      publicKeys: [ 'acb0ab0fd445b9df30b49b100e6f9b164ef8c3ca6f6edc6801af7b96cd183b60f5f0be959229d6c5981505a04d2711c4' ],
-      merkleRoot: '0x406de60516154112c876f7250d8b289d4e3d840074e8cf755922dd5d3c75d1c0',
-      validators: 1,
-    })
+    await expect(depositDataParser(validInput)).resolves.toEqual(validOutput)
   })
 
   it('throws ParserError to verify the deposit data signatures', async () => {
