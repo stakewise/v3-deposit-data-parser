@@ -84,7 +84,7 @@ describe('depositDataParser',() => {
     const errorText = new ParserError(ErrorTypes.INVALID_JSON_FORMAT)
 
     await expect(depositDataParser({ ...validInput, data: {} as FileItem[] })).rejects.toThrow(errorText)
-    await expect(depositDataParser({ ...validInput, data: {} as FileItem[] })).rejects.toThrow(errorText)
+    await expect(depositDataParser({ ...validInput, data: '' as unknown as FileItem[] })).rejects.toThrow(errorText)
     await expect(depositDataParser({ ...validInput, data: null as unknown as FileItem[] })).rejects.toThrow(errorText)
     await expect(depositDataParser({ ...validInput, data: undefined as unknown as FileItem[] })).rejects.toThrow(errorText)
   })
