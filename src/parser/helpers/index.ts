@@ -1,5 +1,6 @@
 export { getBytes } from './getBytes'
 export { default as prefix0x } from './prefix0x'
+export { default as mockData } from './mockData'
 export { default as getAmount } from './getAmount'
 export { default as containers } from './containers'
 export { default as computeDomain } from './computeDomain'
