@@ -6,7 +6,7 @@ import {
   requests,
   getBytes,
   getAmount,
-  getEigenPodsAddress,
+  getEigenPodAddress,
   getWithdrawalCredentials,
 } from './helpers'
 
@@ -24,7 +24,7 @@ const getDepositData = async (values: DepositDataInput): Promise<DepositData> =>
   const isRestakeVault = await requests.checkIsRestakeVault(vaultAddress, network)
 
   const withdrawalCredentialAddress = isRestakeVault
-    ? await getEigenPodsAddress({ vaultAddress, withdrawalAddress, network })
+    ? await getEigenPodAddress({ vaultAddress, withdrawalAddress, network })
     : vaultAddress
 
   try {

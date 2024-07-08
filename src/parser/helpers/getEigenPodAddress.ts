@@ -3,13 +3,13 @@ import { SupportedNetworks } from '../types'
 import ParserError, { ErrorTypes } from './errors'
 
 
-export type GetEigenPodsAddressInput = {
+export type GetEigenPodAddressInput = {
   vaultAddress: string
   withdrawalAddress?: string
   network: SupportedNetworks
 }
 
-const getEigenPodsAddress = async (values: GetEigenPodsAddressInput): Promise<string> => {
+const getEigenPodAddress = async (values: GetEigenPodAddressInput): Promise<string> => {
   const { vaultAddress, withdrawalAddress, network } = values
 
   if (!withdrawalAddress) {
@@ -32,4 +32,4 @@ const getEigenPodsAddress = async (values: GetEigenPodsAddressInput): Promise<st
 }
 
 
-export default getEigenPodsAddress
+export default getEigenPodAddress

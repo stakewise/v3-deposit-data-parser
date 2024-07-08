@@ -12,7 +12,8 @@ const getEigenPods = async (vaultId: string, network: SupportedNetworks) => {
     const data = await gqlRequest({ query, variables }, network)
 
     return data?.eigenPods as EigenPods
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error fetching EigenPods:', error)
   }
 }

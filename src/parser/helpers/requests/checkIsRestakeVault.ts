@@ -10,7 +10,8 @@ const checkIsRestakeVault = async (vaultId: string, network: SupportedNetworks) 
     const data = await gqlRequest({ query, variables }, network)
 
     return data?.vault?.isRestake
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error fetching isRestake:', error)
   }
 }
