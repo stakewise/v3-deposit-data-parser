@@ -3,13 +3,13 @@ import { SupportedNetworks } from '../types'
 import ParserError, { ErrorTypes } from './errors'
 
 
-type Input = {
+export type GetOperatorAddressInput = {
   vaultAddress: string
   withdrawalAddress?: string
   network: SupportedNetworks
 }
 
-const getOperatorAddress = async (values: Input): Promise<string> => {
+const getOperatorAddress = async (values: GetOperatorAddressInput): Promise<string> => {
   const { vaultAddress, withdrawalAddress, network } = values
 
   if (!withdrawalAddress) {
