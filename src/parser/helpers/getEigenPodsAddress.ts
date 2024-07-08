@@ -3,13 +3,13 @@ import { SupportedNetworks } from '../types'
 import ParserError, { ErrorTypes } from './errors'
 
 
-export type GetOperatorAddressInput = {
+export type GetEigenPodsAddressInput = {
   vaultAddress: string
   withdrawalAddress?: string
   network: SupportedNetworks
 }
 
-const getOperatorAddress = async (values: GetOperatorAddressInput): Promise<string> => {
+const getEigenPodsAddress = async (values: GetEigenPodsAddressInput): Promise<string> => {
   const { vaultAddress, withdrawalAddress, network } = values
 
   if (!withdrawalAddress) {
@@ -18,18 +18,18 @@ const getOperatorAddress = async (values: GetOperatorAddressInput): Promise<stri
 
   const eigenPods = await getEigenPods(vaultAddress, network)
 
-  if (!eigenPods || eigenPods.length === 0) {
+  if (!eigenPods?.length) {
     throw new ParserError(ErrorTypes.EIGEN_PODS_EMPTY)
   }
 
-  const operatorAddress = eigenPods.find((eigenPod) => eigenPod.address === withdrawalAddress)
+  const eigenPod = eigenPods.find((eigenPod) => eigenPod.address === withdrawalAddress)
 
-  if (!operatorAddress) {
+  if (!eigenPod) {
     throw new ParserError(ErrorTypes.INVALID_WITHDRAW_ADDRESS)
   }
 
-  return operatorAddress.address
+  return eigenPod.address
 }
 
 
-export default getOperatorAddress
+export default getEigenPodsAddress

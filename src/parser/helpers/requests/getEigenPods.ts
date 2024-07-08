@@ -1,37 +1,18 @@
-import { urls } from './urls'
+import gqlRequest from './gqlRequest'
 import { SupportedNetworks } from '../../types'
 
 
 type EigenPods = { address: string }[]
 
-const getEigenPods = async (vaultId: string, network: SupportedNetworks)=> {
+const getEigenPods = async (vaultId: string, network: SupportedNetworks) => {
+  const query = `query EigenPods($vaultId: ID!) { eigenPods(where: { vault: $vaultId }) { address }}`
+  const variables = { vaultId: vaultId.toLowerCase() }
+
   try {
-    const response = await fetch(urls[network], {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        query: `query EigenPods($vaultId: ID!) { eigenPods(where: { vault: $vaultId }) { address }}`,
-        variables: {
-          vaultId: vaultId.toLowerCase(),
-        },
-      }),
-    })
+    const data = await gqlRequest({ query, variables }, network)
 
-    if (response?.status !== 200) {
-      throw new Error(`API request failed: ${response?.url}`)
-    }
-
-    const result = await response.json()
-
-    if (result?.errors) {
-      throw new Error(result.errors[0].message)
-    }
-
-    return result?.data?.eigenPods as EigenPods
-  }
-  catch (error) {
+    return data?.eigenPods as EigenPods
+  } catch (error) {
     console.error('Error fetching EigenPods:', error)
   }
 }

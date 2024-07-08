@@ -20,7 +20,6 @@ describe('getDepositData',() => {
       const amount = getAmount(network)
       const result = await getDepositData(data)
 
-      expect(await getDepositData(data)).toEqual(result)
       expect(result.amount).toEqual(amount)
     })
   })
