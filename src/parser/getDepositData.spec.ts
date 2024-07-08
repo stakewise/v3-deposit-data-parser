@@ -15,12 +15,12 @@ describe('getDepositData',() => {
   const networks: SupportedNetworks[] = [ 'holesky', 'mainnet', 'gnosis', 'chiado' ]
 
   networks.forEach(network => {
-    it(`processes valid amount with "${network}" network`, () => {
+    it(`processes valid amount with "${network}" network`, async () => {
       const data: DepositDataInput = { ...mockInput, network }
       const amount = getAmount(network)
-      const result = getDepositData(data)
+      const result = await getDepositData(data)
 
-      expect(getDepositData(data)).toEqual(result)
+      expect(await getDepositData(data)).toEqual(result)
       expect(result.amount).toEqual(amount)
     })
   })

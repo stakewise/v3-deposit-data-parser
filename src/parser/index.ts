@@ -19,12 +19,12 @@ export const depositDataParser = async (input: ParserInput) => {
   const pubkeySet = new Set<string>()
   const treeLeaves: Uint8Array[] = []
 
-  parsedFile.forEach((item: FileItem, index) => {
-    const { pubkey, signature } = item
+  await Promise.all(parsedFile.map(async (item: FileItem, index) => {
+    const { pubkey, signature, withdrawal_address } = item
 
     validateFields({ item })
 
-    const depositData = getDepositData({ pubkey, vaultAddress, network })
+    const depositData = await getDepositData({ pubkey, vaultAddress, withdrawalAddress: withdrawal_address, network })
 
     verifySignature({ bls, pubkey, signature, depositData, network })
 
@@ -41,7 +41,7 @@ export const depositDataParser = async (input: ParserInput) => {
         })
       }
     }
-  })
+  }))
 
   if (pubkeySet.size !== parsedFile?.length) {
     throw new ParserError(ErrorTypes.DUPLICATE_PUBLIC_KEYS)

@@ -5,6 +5,7 @@ export type FileItem = {
   amount: number
   pubkey: string
   signature: string
+  withdrawal_address?: string
 }
 
 export type DepositDataFile = FileItem[]
