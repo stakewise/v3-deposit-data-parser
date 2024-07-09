@@ -1,18 +1,34 @@
 import { DepositData, SupportedNetworks } from './types'
-import { getWithdrawalCredentials, prefix0x, ParserError, ErrorTypes, getBytes, getAmount } from './helpers'
+import {
+  prefix0x,
+  ErrorTypes,
+  ParserError,
+  requests,
+  getBytes,
+  getAmount,
+  getEigenPodAddress,
+  getWithdrawalCredentials,
+} from './helpers'
 
 
 export type DepositDataInput = {
   pubkey: string
   vaultAddress: string
+  withdrawalAddress?: string
   network: SupportedNetworks
 }
 
-const getDepositData = (values: DepositDataInput): DepositData => {
-  const { pubkey, vaultAddress, network } = values
+const getDepositData = async (values: DepositDataInput): Promise<DepositData> => {
+  const { pubkey, vaultAddress, withdrawalAddress, network } = values
+
+  const isRestakeVault = await requests.checkIsRestakeVault(vaultAddress, network)
+
+  const withdrawalCredentialAddress = isRestakeVault
+    ? await getEigenPodAddress({ vaultAddress, withdrawalAddress, network })
+    : vaultAddress
 
   try {
-    const withdrawalCredentials = getWithdrawalCredentials(vaultAddress)
+    const withdrawalCredentials = getWithdrawalCredentials(withdrawalCredentialAddress)
 
     const depositData = {
       amount: getAmount(network),
