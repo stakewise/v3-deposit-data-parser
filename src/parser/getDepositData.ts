@@ -21,14 +21,15 @@ export type DepositDataInput = {
 const getDepositData = async (values: DepositDataInput): Promise<DepositData> => {
   const { pubkey, vaultAddress, withdrawalAddress, network } = values
 
-  const isRestakeVault = await requests.checkIsRestakeVault(vaultAddress, network)
-
-  const withdrawalCredentialAddress = isRestakeVault
-    ? await getEigenPodAddress({ vaultAddress, withdrawalAddress, network })
-    : vaultAddress
+  // TODO: use withdrawalCredentialAddress instead of vaultAddress after restake logic is implemented
+  // const isRestakeVault = await requests.checkIsRestakeVault(vaultAddress, network)
+  //
+  // const withdrawalCredentialAddress = isRestakeVault
+  //   ? await getEigenPodAddress({ vaultAddress, withdrawalAddress, network })
+  //   : vaultAddress
 
   try {
-    const withdrawalCredentials = getWithdrawalCredentials(withdrawalCredentialAddress)
+    const withdrawalCredentials = getWithdrawalCredentials(vaultAddress)
 
     const depositData = {
       amount: getAmount(network),
