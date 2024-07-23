@@ -29,7 +29,7 @@ export const depositDataParser = async (input: ParserInput) => {
 
     verifySignature({ bls, pubkey, signature, depositData, network })
 
-    const treeLeaf = getTreeLeaf({ pubkey, signature, depositData })
+    const treeLeaf = getTreeLeaf({ pubkey, signature, depositData, withdrawalAddress: withdrawal_address })
 
     pubkeySet.add(pubkey)
     treeLeaves.push(treeLeaf)
