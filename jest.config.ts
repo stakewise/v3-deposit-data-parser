@@ -11,6 +11,9 @@ const config: Config = {
   testMatch: [ '**/*.spec.ts' ],
   collectCoverageFrom: [ 'src/**/*.ts' ],
   moduleFileExtensions: [ 'json', 'js', 'ts' ],
+  transform: {
+    '\\.[jt]sx?$': 'ts-jest',
+  },
   globals: {
     isolatedModules: true,
   },

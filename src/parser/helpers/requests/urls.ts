@@ -1,4 +1,4 @@
-import type { SupportedNetworks } from 'parser/types'
+import type { SupportedNetworks } from '../../types'
 
 
 export const urls: Record<SupportedNetworks, string> = {

@@ -8,6 +8,7 @@
   ],
   "parser": "@typescript-eslint/parser",
   "ignorePatterns": [
+    "scripts/*",
     "dist/*",
     "*.d.ts"
   ],
