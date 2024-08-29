@@ -9,8 +9,6 @@ const check = async () => {
     .replace(/v/g, '')
     .trim()
 
-    console.log('releaseVersion ---', releaseVersion)
-
   if (npmVersion !== releaseVersion || !releaseVersion) {
     console.error(`Please add ${npmVersion} release to Github https://github.com/stakewise/v3-deposit-data-parser/releases/new`)
     process.exit(1)
