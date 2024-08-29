@@ -10,10 +10,12 @@
   "typings": "dist/index.d.ts",
   "module": "dist/index.esm.js",
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "npm run beforePublish",
     "test": "jest --clearCache && jest --onlyChanged",
     "build": "npm run test && npm run prepare && rm -rf ./dist && npm run rollup",
-    "rollup": "rollup --config rollup.config.js --bundleConfigAsCjs"
+    "rollup": "rollup --config rollup.config.js --bundleConfigAsCjs",
+    "beforePublish": "node ./scripts/beforePublish",
+    "publish": "npm run build && npm publish --tag=latest"
   },
   "files": [
     "dist/",
@@ -46,7 +48,6 @@
     "bls-eth-wasm": "1.1.1",
     "eslint": "8.56.0",
     "eslint-plugin-import": "2.28.1",
-    "husky": "8.0.0",
     "jest": "29.7.0",
     "rollup": "3.29.1",
     "rollup-plugin-delete": "2.0.0",
