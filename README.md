@@ -80,6 +80,7 @@ self.addEventListener('message', async (event) => {
 | `INVALID_JSON_FORMAT` | Deposit data file must be in JSON format
 | `MERKLE_TREE_GENERATION_ERROR` | Failed to generate the Merkle tree
 | `INVALID_PUBLIC_KEY_FORMAT` | Failed to parse deposit data public key
+| `DUPLICATE_DEPOSIT_DATA` | The deposit data file has already been uploaded. 
 | `INVALID_WITHDRAW_ADDRESS` | The withdrawal addresses don’t match Eigen pods
 | `MISSING_FIELDS` | Failed to verify the deposit data public keys. Missing fields: {fields}
 | `DUPLICATE_PUBLIC_KEYS` | Failed to verify the deposit data public keys. All the entries must be unique.

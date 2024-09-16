@@ -25,6 +25,7 @@ export type DepositData = {
 export type ParserInput = {
   data: DepositDataFile
   vaultAddress: string
+  depositDataRoot: string
   network: SupportedNetworks
   onProgress?: (progress: Progress) => void
 }

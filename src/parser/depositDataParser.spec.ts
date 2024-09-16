@@ -7,6 +7,7 @@ import { depositDataParser } from './index'
 const testData = mockData[0]
 
 const validInput: ParserInput = {
+  depositDataRoot: '0x406de60516154112c876f7250d8b289d4e3d840074e8cf755922dd',
   vaultAddress: '0x9b6a6867d222d62dc301528190e3984d60adb06b',
   network: 'holesky',
   data: mockData,
@@ -93,6 +94,14 @@ describe('depositDataParser',() => {
     const errorText = new ParserError(ErrorTypes.EMPTY_FILE)
 
     await expect(depositDataParser({ ...validInput, data: [] })).rejects.toThrow(errorText)
+  })
+
+  it('throws ParserError if the deposit data file has already been uploaded', async () => {
+    const errorText = new ParserError(ErrorTypes.DUPLICATE_DEPOSIT_DATA)
+
+    await expect(depositDataParser({
+      ...validInput, depositDataRoot: '0x406de60516154112c876f7250d8b289d4e3d840074e8cf755922dd5d3c75d1c0',
+    })).rejects.toThrow(errorText)
   })
 
 })

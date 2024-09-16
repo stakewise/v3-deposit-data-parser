@@ -11,7 +11,7 @@ import verifySignature from './verifySignature'
 
 
 export const depositDataParser = async (input: ParserInput) => {
-  const { vaultAddress, network, data, onProgress } = input
+  const { vaultAddress, depositDataRoot, network, data, onProgress } = input
 
   const bls = await initBls()
   const parsedFile = validateJson({ data })
@@ -46,5 +46,5 @@ export const depositDataParser = async (input: ParserInput) => {
     throw new ParserError(ErrorTypes.DUPLICATE_PUBLIC_KEYS)
   }
 
-  return getPostMessage({ pubkeySet, parsedFile, treeLeaves })
+  return getPostMessage({ pubkeySet, parsedFile, treeLeaves, depositDataRoot })
 }
