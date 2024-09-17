@@ -1,4 +1,4 @@
-import { ParserError, ErrorTypes } from './helpers'
+import { ParserError, ErrorTypes, requests } from './helpers'
 
 import initBls from './initBls'
 import getTreeLeaf from './getTreeLeaf'
@@ -19,13 +19,20 @@ export const depositDataParser = async (input: ParserInput) => {
   const pubkeySet = new Set<string>()
   const treeLeaves: Uint8Array[] = []
 
+  const vaultInfo = await requests.getVaultInfo(vaultAddress, network)
+
   for (let index = 0; index < parsedFile.length; index++) {
     const item = parsedFile[index]
     const { pubkey, signature, withdrawal_address } = item
 
     validateFields({ item })
 
-    const depositData = await getDepositData({ pubkey, vaultAddress, withdrawalAddress: withdrawal_address, network })
+    const depositData = await getDepositData({
+      network,
+      pubkey, vaultAddress,
+      isRestake: vaultInfo?.isRestake,
+      withdrawalAddress: withdrawal_address,
+    })
 
     verifySignature({ bls, pubkey, signature, depositData, network })
 
@@ -46,5 +53,10 @@ export const depositDataParser = async (input: ParserInput) => {
     throw new ParserError(ErrorTypes.DUPLICATE_PUBLIC_KEYS)
   }
 
-  return getPostMessage({ pubkeySet, parsedFile, treeLeaves })
+  return getPostMessage({
+    pubkeySet,
+    parsedFile,
+    treeLeaves,
+    depositDataRoot: vaultInfo?.depositDataRoot,
+  })
 }

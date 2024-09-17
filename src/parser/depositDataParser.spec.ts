@@ -1,8 +1,12 @@
 import type { FileItem, SupportedNetworks, ParserInput, ParserOutput } from './types'
-import { ErrorTypes, mockData, ParserError } from './helpers'
+import { ErrorTypes, mockData, ParserError, requests } from './helpers'
 import { networkNames } from './verifySignature'
 import { depositDataParser } from './index'
 
+
+type MockVaultInfo = jest.MockedFunction<typeof requests.getVaultInfo>
+
+jest.mock('./helpers/requests/getVaultInfo')
 
 const testData = mockData[0]
 
@@ -20,6 +24,9 @@ const validOutput: ParserOutput = {
 }
 
 describe('depositDataParser',() => {
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
 
   it('processes valid input without throwing errors ', async() => {
     await expect(depositDataParser(validInput)).resolves.toEqual(validOutput)
@@ -93,6 +100,18 @@ describe('depositDataParser',() => {
     const errorText = new ParserError(ErrorTypes.EMPTY_FILE)
 
     await expect(depositDataParser({ ...validInput, data: [] })).rejects.toThrow(errorText)
+  })
+
+  it('throws ParserError if the deposit data file has already been uploaded', async () => {
+
+    (requests.getVaultInfo as MockVaultInfo).mockResolvedValue({
+      isRestake: false,
+      depositDataRoot: '0x406de60516154112c876f7250d8b289d4e3d840074e8cf755922dd5d3c75d1c0',
+    })
+
+    const errorText = new ParserError(ErrorTypes.DUPLICATE_DEPOSIT_DATA)
+
+    await expect(depositDataParser(validInput)).rejects.toThrow(errorText)
   })
 
 })

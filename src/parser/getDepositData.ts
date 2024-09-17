@@ -3,7 +3,6 @@ import {
   prefix0x,
   ErrorTypes,
   ParserError,
-  requests,
   getBytes,
   getAmount,
   getEigenPodAddress,
@@ -13,17 +12,16 @@ import {
 
 export type DepositDataInput = {
   pubkey: string
+  isRestake: boolean
   vaultAddress: string
   withdrawalAddress?: string
   network: SupportedNetworks
 }
 
 const getDepositData = async (values: DepositDataInput): Promise<DepositData> => {
-  const { pubkey, vaultAddress, withdrawalAddress, network } = values
+  const { pubkey, vaultAddress, isRestake, withdrawalAddress, network } = values
 
-  const isRestakeVault = await requests.checkIsRestakeVault(vaultAddress, network)
-
-  const withdrawalCredentialAddress = isRestakeVault
+  const withdrawalCredentialAddress = isRestake
     ? await getEigenPodAddress({ vaultAddress, withdrawalAddress, network })
     : vaultAddress
 
