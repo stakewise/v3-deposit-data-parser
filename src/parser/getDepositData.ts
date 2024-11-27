@@ -5,25 +5,20 @@ import {
   ParserError,
   getBytes,
   getAmount,
-  getEigenPodAddress,
   getWithdrawalCredentials,
 } from './helpers'
 
 
 export type DepositDataInput = {
   pubkey: string
-  isRestake: boolean
   vaultAddress: string
-  withdrawalAddress?: string
   network: SupportedNetworks
 }
 
 const getDepositData = async (values: DepositDataInput): Promise<DepositData> => {
-  const { pubkey, vaultAddress, isRestake, withdrawalAddress, network } = values
+  const { pubkey, vaultAddress, network } = values
 
-  const withdrawalCredentialAddress = isRestake
-    ? await getEigenPodAddress({ vaultAddress, withdrawalAddress, network })
-    : vaultAddress
+  const withdrawalCredentialAddress = vaultAddress
 
   try {
     const withdrawalCredentials = getWithdrawalCredentials(withdrawalCredentialAddress)

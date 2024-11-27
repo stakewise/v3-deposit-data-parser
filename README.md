@@ -17,7 +17,6 @@
 - **Signature Verification:** Leverages BLS (Boneh-Lynn-Shacham) signatures to authenticate deposit data against given public keys.
 - **Progress Callbacks:** Provides real-time feedback on processing progress, suitable for applications processing large datasets.
 - **Error Handling:** Implements comprehensive error handling, with custom error types and callback functions for robust error management.
-- **Withdrawal Address Verification:** The verification is carried out to confirm that the Withdrawal Address is included in the deposit data and that it matches any of the eigen pods addresses that we request directly for the restake vault.
 ## Installation and Setup
 ```bash
 npm i @stakewise/v3-deposit-data-parser
@@ -76,12 +75,10 @@ self.addEventListener('message', async (event) => {
 | Type | Message |
 |------------|---------|
 | `EMPTY_FILE` | Deposit data file is empty
-| `EIGEN_PODS_EMPTY` | No Eigen pods in the Vault
 | `INVALID_JSON_FORMAT` | Deposit data file must be in JSON format
 | `MERKLE_TREE_GENERATION_ERROR` | Failed to generate the Merkle tree
 | `INVALID_PUBLIC_KEY_FORMAT` | Failed to parse deposit data public key
-| `DUPLICATE_DEPOSIT_DATA` | The deposit data file has already been uploaded. 
-| `INVALID_WITHDRAW_ADDRESS` | The withdrawal addresses don’t match Eigen pods
+| `DUPLICATE_DEPOSIT_DATA` | The deposit data file has already been uploaded.
 | `MISSING_FIELDS` | Failed to verify the deposit data public keys. Missing fields: {fields}
 | `DUPLICATE_PUBLIC_KEYS` | Failed to verify the deposit data public keys. All the entries must be unique.
 | `INVALID_SIGNATURE` | Failed to verify the deposit data signatures. Please make sure the file is generated for the {network} network.
