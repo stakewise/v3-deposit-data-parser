@@ -105,7 +105,6 @@ describe('depositDataParser',() => {
   it('throws ParserError if the deposit data file has already been uploaded', async () => {
 
     (requests.getVaultInfo as MockVaultInfo).mockResolvedValue({
-      isRestake: false,
       depositDataRoot: '0x406de60516154112c876f7250d8b289d4e3d840074e8cf755922dd5d3c75d1c0',
     })
 

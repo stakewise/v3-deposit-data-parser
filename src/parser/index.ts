@@ -30,8 +30,6 @@ export const depositDataParser = async (input: ParserInput) => {
     const depositData = await getDepositData({
       network,
       pubkey, vaultAddress,
-      isRestake: vaultInfo?.isRestake,
-      withdrawalAddress: withdrawal_address,
     })
 
     verifySignature({ bls, pubkey, signature, depositData, network })
