@@ -8,7 +8,6 @@ const { pubkey } = mockData[0]
 
 const mockInput = {
   pubkey,
-  isRestake: false,
   vaultAddress: '0x9b6a6867d222d62dc301528190e3984d60adb06b',
 }
 

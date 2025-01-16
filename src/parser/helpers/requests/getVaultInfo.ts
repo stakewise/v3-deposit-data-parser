@@ -3,7 +3,7 @@ import { SupportedNetworks } from '../../types'
 
 
 const getVaultInfo = async (vaultId: string, network: SupportedNetworks) => {
-  const query = `query Vault($vaultId: ID!) { vault(id: $vaultId) { isRestake depositDataRoot }}`
+  const query = `query Vault($vaultId: ID!) { vault(id: $vaultId) { depositDataRoot }}`
 
   const variables = { vaultId: vaultId.toLowerCase() }
 
