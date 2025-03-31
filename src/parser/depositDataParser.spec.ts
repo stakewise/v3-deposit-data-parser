@@ -11,15 +11,15 @@ jest.mock('./helpers/requests/getVaultInfo')
 const testData = mockData[0]
 
 const validInput: ParserInput = {
-  vaultAddress: '0x9b6a6867d222d62dc301528190e3984d60adb06b',
-  network: 'holesky',
+  vaultAddress: '0xAC0F906E433d58FA868F936E8A43230473652885',
+  network: 'mainnet',
   data: mockData,
   onProgress: jest.fn(),
 }
 
 const validOutput: ParserOutput = {
-  publicKeys: [ 'acb0ab0fd445b9df30b49b100e6f9b164ef8c3ca6f6edc6801af7b96cd183b60f5f0be959229d6c5981505a04d2711c4' ],
-  merkleRoot: '0x406de60516154112c876f7250d8b289d4e3d840074e8cf755922dd5d3c75d1c0',
+  publicKeys: [ '914fc4d761c72c0053b6e71967caf594584d5eb648ecd924f7ad87570a385b66f37b5db8b34d666ca4d2ff9a785984fb' ],
+  merkleRoot: '0x9fc6a754977d4e69a51fb5bdbaef88bd46886ec783a8cab34e7963eb7d03aa62',
   validators: 1,
 }
 
@@ -105,7 +105,7 @@ describe('depositDataParser',() => {
   it('throws ParserError if the deposit data file has already been uploaded', async () => {
 
     (requests.getVaultInfo as MockVaultInfo).mockResolvedValue({
-      depositDataRoot: '0x406de60516154112c876f7250d8b289d4e3d840074e8cf755922dd5d3c75d1c0',
+      depositDataRoot: '0x9fc6a754977d4e69a51fb5bdbaef88bd46886ec783a8cab34e7963eb7d03aa62',
     })
 
     const errorText = new ParserError(ErrorTypes.DUPLICATE_DEPOSIT_DATA)
