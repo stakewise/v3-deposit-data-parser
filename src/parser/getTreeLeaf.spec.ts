@@ -10,7 +10,7 @@ const validInput: TreeLeafInput = {
   signature,
   depositData: {
     signature: Buffer.alloc(0),
-    amount: getAmount('holesky'),
+    amount: getAmount('mainnet'),
     pubkey: getBytes(prefix0x.add(pubkey)),
     withdrawalCredentials: getWithdrawalCredentials('0x9b6a6867d222d62dc301528190e3984d60adb06b'),
   },
