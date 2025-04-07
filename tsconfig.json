@@ -7,6 +7,7 @@
     "allowJs": true,
     "outDir": "dist",
     "sourceMap": true,
+    "composite": true,
     "target": "esnext",
     "module": "esnext",
     "declaration": true,
@@ -17,7 +18,6 @@
     "declarationDir": "dist",
     "resolveJsonModule": true,
     "moduleResolution": "node",
-    "emitDeclarationOnly": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
