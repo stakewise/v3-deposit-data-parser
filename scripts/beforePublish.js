@@ -1,5 +1,5 @@
-import { execSync } from 'child_process';
-import pkg from '../package.json' with { type: 'json' };
+import { execSync } from 'child_process'
+import pkg from '../package.json' with { type: 'json' }
 
 
 const check = async () => {
