@@ -14,8 +14,8 @@
     "prepare": "npm run beforePublish",
     "test": "jest --clearCache && jest --onlyChanged",
     "build": "npm run test && npm run prepare && rm -rf ./dist && npm run rollup",
-    "rollup": "rollup --config rollup.config.mjs",
-    "beforePublish": "node ./scripts/beforePublish.mjs",
+    "rollup": "rollup --config rollup.config.js",
+    "beforePublish": "node ./scripts/beforePublish",
     "publish": "npm run build && npm publish --tag=latest"
   },
   "files": [
