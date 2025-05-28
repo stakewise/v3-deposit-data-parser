@@ -12,10 +12,10 @@
   "module": "dist/index.esm.js",
   "scripts": {
     "prepare": "npm run beforePublish",
-    "test": "jest --clearCache && jest --all",
+    "test": "jest --clearCache && jest --onlyChanged",
     "build": "npm run test && npm run prepare && rm -rf ./dist && npm run rollup",
     "rollup": "rollup --config rollup.config.mjs",
-    "beforePublish": "node ./scripts/beforePublish",
+    "beforePublish": "node ./scripts/beforePublish.mjs",
     "publish": "npm run build && npm publish --tag=latest"
   },
   "files": [
