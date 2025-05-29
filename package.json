@@ -12,7 +12,7 @@
   "module": "dist/index.esm.js",
   "scripts": {
     "prepare": "npm run beforePublish",
-    "test": "jest --clearCache && jest --onlyChanged",
+    "test": "jest --clearCache && jest --all",
     "build": "npm run test && npm run prepare && rm -rf ./dist && npm run rollup",
     "rollup": "rollup --config rollup.config.js",
     "beforePublish": "node ./scripts/beforePublish",
@@ -35,7 +35,7 @@
     "./package.json": "./package.json"
   },
   "devDependencies": {
-    "@chainsafe/ssz": "0.11.1",
+    "@chainsafe/ssz": "1.2.0",
     "@openzeppelin/merkle-tree": "1.0.8",
     "@rollup/plugin-commonjs": "28.0.3",
     "@rollup/plugin-json": "6.1.0",
@@ -56,6 +56,7 @@
     "rollup-plugin-peer-deps-external": "2.2.4",
     "ts-jest": "29.3.4",
     "ts-node": "10.9.2",
+    "tslib": "2.8.1",
     "typescript": "5.8.3"
   }
 }
