@@ -28,7 +28,7 @@ describe('depositDataParser',() => {
     jest.clearAllMocks()
   })
 
-  it('processes valid input without throwing errors ', async() => {
+  it('processes valid input without throwing errors', async() => {
     await expect(depositDataParser(validInput)).resolves.toEqual(validOutput)
   })
 
