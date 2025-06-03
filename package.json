@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "1.9.3",
+  "version": "1.10.0",
   "main": "dist/index.js",
   "name": "@stakewise/v3-deposit-data-parser",
   "description": "v3-deposit-data-parser",
