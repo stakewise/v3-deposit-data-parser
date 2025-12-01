@@ -13,7 +13,6 @@ const genesisValidatorsRoot = Buffer.alloc(32, 0)
 export const networkNames: Record<SupportedNetworks, string> = {
   'mainnet': 'Ethereum',
   'gnosis': 'Gnosis Chain',
-  'chiado': 'Chiado Testnet',
   'hoodi': 'Hoodi Testnet',
 }
 

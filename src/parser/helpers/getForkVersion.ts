@@ -7,7 +7,6 @@ import type { SupportedNetworks } from '../types'
 const forkVersions: Record<SupportedNetworks, string> = {
   mainnet: '0x00000000',
   gnosis: '0x00000064',
-  chiado: '0x0000006f',
   hoodi: '0x10000910',
 }
 

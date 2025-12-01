@@ -12,7 +12,7 @@ const mockInput = {
 }
 
 describe('getDepositData',() => {
-  const networks: SupportedNetworks[] = [ 'mainnet', 'gnosis', 'chiado' ]
+  const networks: SupportedNetworks[] = [ 'mainnet', 'gnosis' ]
 
   networks.forEach(network => {
     it(`processes valid amount with "${network}" network`, async () => {
