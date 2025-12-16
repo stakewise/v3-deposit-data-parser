@@ -13,11 +13,11 @@
   "scripts": {
     "test": "jest --clearCache && jest --all",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
-    "build": "npm run test && npm run prepare && rm -rf ./dist && npm run rollup",
+    "build": "pnpm test && pnpm prepare && rm -rf ./dist && pnpm rollup",
     "rollup": "rollup --config rollup.config.js",
     "beforePublish": "node ./scripts/beforePublish",
-    "prepare": "husky && npm run beforePublish",
-    "publish": "npm run build && npm publish --tag=latest"
+    "prepare": "husky && pnpm beforePublish",
+    "publish": "pnpm build && pnpm publish --tag=latest"
   },
   "files": [
     "dist/",
