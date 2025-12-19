@@ -14,18 +14,20 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: '24.12.0'
-          cache: 'pnpm'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@stakewise'
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10.25.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24.12.0'
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@stakewise'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
