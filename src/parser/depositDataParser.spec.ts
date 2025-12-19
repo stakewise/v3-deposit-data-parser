@@ -1,12 +1,17 @@
-import type { FileItem, SupportedNetworks, ParserInput, ParserOutput } from './types'
-import { ErrorTypes, mockData, ParserError, requests } from './helpers'
-import { networkNames } from './verifySignature'
-import { depositDataParser } from './index'
+import { jest } from '@jest/globals'
 
+import type { FileItem, SupportedNetworks, ParserInput, ParserOutput } from './types'
+
+
+jest.unstable_mockModule('./helpers/requests/getVaultInfo', () => ({
+  default: jest.fn(),
+}))
+
+const { ErrorTypes, mockData, ParserError, requests } = await import('./helpers')
+const { networkNames } = await import('./verifySignature')
+const { depositDataParser } = await import('./index')
 
 type MockVaultInfo = jest.MockedFunction<typeof requests.getVaultInfo>
-
-jest.mock('./helpers/requests/getVaultInfo')
 
 const testData = mockData[0]
 
