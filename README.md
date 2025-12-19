@@ -82,4 +82,3 @@ self.addEventListener('message', async (event) => {
 | `MISSING_FIELDS` | Failed to verify the deposit data public keys. Missing fields: {fields}
 | `DUPLICATE_PUBLIC_KEYS` | Failed to verify the deposit data public keys. All the entries must be unique.
 | `INVALID_SIGNATURE` | Failed to verify the deposit data signatures. Please make sure the file is generated for the {network} network.
-
