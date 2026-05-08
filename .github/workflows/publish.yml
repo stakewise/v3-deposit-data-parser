@@ -55,9 +55,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
 
-      - name: Run beforePublish
-        run: pnpm beforePublish
-
       - name: Run unit tests
         run: pnpm test:ci
 

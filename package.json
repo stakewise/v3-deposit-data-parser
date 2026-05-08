@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "1.10.1",
+  "version": "1.10.2",
   "main": "dist/index.js",
   "name": "@stakewise/v3-deposit-data-parser",
   "description": "v3-deposit-data-parser",
@@ -20,7 +20,6 @@
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "build": "pnpm test:ci && pnpm prepare && rm -rf ./dist && pnpm rollup",
     "rollup": "rollup --config rollup.config.js",
-    "beforePublish": "node ./scripts/beforePublish",
     "prepare": "husky && pnpm beforePublish",
     "release": "pnpm build && pnpm publish --tag=latest"
   },
