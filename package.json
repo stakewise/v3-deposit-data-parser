@@ -20,7 +20,7 @@
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "build": "pnpm test:ci && pnpm prepare && rm -rf ./dist && pnpm rollup",
     "rollup": "rollup --config rollup.config.js",
-    "prepare": "husky && pnpm beforePublish",
+    "prepare": "husky",
     "release": "pnpm build && pnpm publish --tag=latest"
   },
   "files": [
