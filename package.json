@@ -5,6 +5,10 @@
   "name": "@stakewise/v3-deposit-data-parser",
   "description": "v3-deposit-data-parser",
   "homepage": "https://github.com/stakewise/v3-deposit-data-parser",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stakewise/v3-deposit-data-parser.git"
+  },
   "sideEffects": false,
   "types": "dist/index.d.ts",
   "license": "AGPL-3.0-only",
