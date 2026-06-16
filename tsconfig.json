@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "strict": true,
     "jsx": "react",
     "rootDir": ".",
@@ -16,13 +15,13 @@
     "isolatedModules": true,
     "declarationDir": "dist",
     "resolveJsonModule": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "emitDeclarationOnly": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "*": [
-        "src/*"
+        "./src/*"
       ]
     }
   },
