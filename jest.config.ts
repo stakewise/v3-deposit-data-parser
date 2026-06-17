@@ -17,7 +17,7 @@ const config: Config = {
         tsconfig: {
           target: 'es2022',
           module: 'esnext',
-          moduleResolution: 'node',
+          moduleResolution: 'bundler',
           esModuleInterop: true,
           allowJs: true,
         },
