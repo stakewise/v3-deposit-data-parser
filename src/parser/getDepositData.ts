@@ -26,7 +26,7 @@ const getDepositData = async (values: DepositDataInput): Promise<DepositData> =>
     const depositData = {
       amount: getAmount(network),
       pubkey: getBytes(prefix0x.add(pubkey)),
-      signature: Buffer.alloc(0),
+      signature: new Uint8Array(0),
       withdrawalCredentials,
     }
 

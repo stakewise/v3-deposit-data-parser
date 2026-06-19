@@ -32,9 +32,7 @@ const getTreeLeaf = (values: TreeLeafInput): Uint8Array => {
       leafParts.push(getBytes(prefix0x.add(withdrawalAddress)))
     }
 
-    const treeLeaf = Buffer.concat(leafParts)
-
-    return treeLeaf
+    return new Uint8Array(Buffer.concat(leafParts))
   }
   catch (error) {
     console.error(error)
