@@ -17,9 +17,9 @@ type Progress = {
 
 export type DepositData = {
   amount: number
-  signature: Buffer
+  signature: Uint8Array
   pubkey: Uint8Array
-  withdrawalCredentials: Buffer
+  withdrawalCredentials: Uint8Array
 }
 
 export type ParserInput = {

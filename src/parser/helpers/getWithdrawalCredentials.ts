@@ -5,17 +5,18 @@ import { getBytes } from './getBytes'
 // the withdrawal credentials match the Ethereum 1.0 address
 const eth1AddressWithdrawalPrefix = Uint8Array.from([ 1 ])
 
-const getWithdrawalCredentials = (vaultAddress: string): Buffer => Buffer.concat([
+// 32-byte withdrawal credentials: 1 prefix byte + 11 zero padding bytes + 20-byte vault address
+const getWithdrawalCredentials = (vaultAddress: string): Uint8Array => {
+  const result = new Uint8Array(32)
+
   // indicates the type of address to output
-  eth1AddressWithdrawalPrefix,
+  result.set(eth1AddressWithdrawalPrefix, 0)
 
-  // 11 bytes filled with zeros – this is padding needed to make the withdrawal
-  // credentials have a length of 32 bytes (corresponding to the hash size in Ethereum)
-  Buffer.alloc(11),
+  // bytes 1–11 stay zero (padding to 32 bytes), the vault address goes after the padding
+  result.set(getBytes(vaultAddress), 12)
 
-  // Vault address converted to an array of bytes
-  getBytes(vaultAddress),
-])
+  return result
+}
 
 
 export default getWithdrawalCredentials

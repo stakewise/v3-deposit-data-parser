@@ -7,7 +7,7 @@ import type { DepositData, SupportedNetworks } from './types'
 const domainType = Uint8Array.from([ 3, 0, 0, 0 ])
 
 // Creating a zero hash with a length of 32 bytes
-const genesisValidatorsRoot = Buffer.alloc(32, 0)
+const genesisValidatorsRoot = new Uint8Array(32)
 
 // Network names
 export const networkNames: Record<SupportedNetworks, string> = {
